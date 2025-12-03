@@ -46,7 +46,7 @@ All external API calls are proxied through Next.js API routes to:
 | `/api/crypto?action=search&q=` | Search coins |
 | `/api/crypto?action=feargreed` | Get Fear & Greed index |
 | `/api/gemini/analyze` | AI portfolio analysis |
-| `/api/blog` | Generate AI blog posts |
+| `/api/blog/generate` | Generate AI blog posts |
 
 ### Data Sources
 - **Market Data**: CoinPaprika API (no API key required)
