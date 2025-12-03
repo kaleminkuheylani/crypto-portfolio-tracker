@@ -1,47 +1,39 @@
+'use client';
 
 import React, { useState, useEffect } from 'react';
-import { getTopCoins, searchCoins, getFearAndGreedIndex } from './services/cryptoApi';
-import { CoinData, PortfolioItem, PriceAlert, User, FearGreedData } from './types';
-import MarketTable from './components/MarketTable';
-import PortfolioSection from './components/PortfolioSection';
-import GeminiAdvisor from './components/GeminiAdvisor';
-import BlogSection from './components/BlogSection';
-import TradingChart from './components/TradingChart';
-import PremiumModal from './components/PremiumModal';
-import AlertsSection from './components/AlertsSection';
-import PremiumSection from './components/PremiumSection';
-import AuthModal from './components/AuthModal';
-import PaymentModal from './components/PaymentModal';
-import AboutSection from './components/AboutSection';
-import PrivacyModal from './components/PrivacyModal';
-import { AuthService } from './services/authService';
+import { getTopCoins, searchCoins, getFearAndGreedIndex } from '../services/cryptoApi';
+import { CoinData, PortfolioItem, PriceAlert, User, FearGreedData } from '../types';
+import MarketTable from '../components/MarketTable';
+import PortfolioSection from '../components/PortfolioSection';
+import GeminiAdvisor from '../components/GeminiAdvisor';
+import BlogSection from '../components/BlogSection';
+import TradingChart from '../components/TradingChart';
+import PremiumModal from '../components/PremiumModal';
+import AlertsSection from '../components/AlertsSection';
+import PremiumSection from '../components/PremiumSection';
+import AuthModal from '../components/AuthModal';
+import PaymentModal from '../components/PaymentModal';
+import AboutSection from '../components/AboutSection';
+import PrivacyModal from '../components/PrivacyModal';
+import { AuthService } from '../services/authService';
 
-const App: React.FC = () => {
+export default function Home() {
   const [coins, setCoins] = useState<CoinData[]>([]);
-  const [portfolio, setPortfolio] = useState<PortfolioItem[]>(() => {
-    const saved = localStorage.getItem('nexus_portfolio');
-    return saved ? JSON.parse(saved) : [];
-  });
-  const [alerts, setAlerts] = useState<PriceAlert[]>(() => {
-    const saved = localStorage.getItem('nexus_alerts');
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [portfolio, setPortfolio] = useState<PortfolioItem[]>([]);
+  const [alerts, setAlerts] = useState<PriceAlert[]>([]);
   
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<'dashboard' | 'market' | 'blog' | 'chart' | 'alerts' | 'premium' | 'about'>('dashboard');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isPremiumModalOpen, setIsPremiumModalOpen] = useState(false);
   
-  // Search State
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
 
-  // Auth State
   const [user, setUser] = useState<User | null>(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [pendingAssetToAdd, setPendingAssetToAdd] = useState<CoinData | null>(null);
   
-  // Payment State
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
   
@@ -49,11 +41,20 @@ const App: React.FC = () => {
   const [notifications, setNotifications] = useState<{id: string, message: string, type: 'success' | 'info'}[]>([]);
   const [selectedChartCoin, setSelectedChartCoin] = useState<{symbol: string, name: string} | null>(null);
   
-  // Market Sentiment
   const [fearGreedData, setFearGreedData] = useState<FearGreedData | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
 
-  // SEO Management
   useEffect(() => {
+    setIsMounted(true);
+    const savedPortfolio = localStorage.getItem('nexus_portfolio');
+    const savedAlerts = localStorage.getItem('nexus_alerts');
+    if (savedPortfolio) setPortfolio(JSON.parse(savedPortfolio));
+    if (savedAlerts) setAlerts(JSON.parse(savedAlerts));
+  }, []);
+
+  useEffect(() => {
+    if (!isMounted) return;
+    
     let title = "KriptoPusula | Akıllı Kripto Takibi";
     let desc = "KriptoPusula ile portföyünüzü yönetin, yapay zeka destekli analizler alın ve piyasayı canlı takip edin.";
 
@@ -91,20 +92,21 @@ const App: React.FC = () => {
         document.head.appendChild(metaDesc);
     }
     metaDesc.setAttribute('content', desc);
-  }, [activeTab]);
+  }, [activeTab, isMounted]);
 
   useEffect(() => {
-      const currentUser = AuthService.getCurrentUser();
-      if (currentUser) {
-          setUser(currentUser);
-      }
-      
-      // Fetch Fear & Greed Index
-      getFearAndGreedIndex().then(data => setFearGreedData(data));
-  }, []);
+    if (!isMounted) return;
+    const currentUser = AuthService.getCurrentUser();
+    if (currentUser) {
+        setUser(currentUser);
+    }
+    
+    getFearAndGreedIndex().then(data => setFearGreedData(data));
+  }, [isMounted]);
 
-  // Data Fetching Logic (Supports Search)
   useEffect(() => {
+    if (!isMounted) return;
+    
     const fetchData = async () => {
       if (searchQuery.length > 2) {
           setIsSearching(true);
@@ -112,7 +114,6 @@ const App: React.FC = () => {
           setCoins(results);
           setIsSearching(false);
       } else {
-          // If search is cleared, reload top coins
           if (coins.length === 0 || searchQuery === '') {
               if (coins.length === 0) setIsLoading(true);
               const data = await getTopCoins();
@@ -122,28 +123,28 @@ const App: React.FC = () => {
       }
     };
 
-    // Debounce search
     const timeoutId = setTimeout(() => {
         fetchData();
     }, 500);
 
     return () => clearTimeout(timeoutId);
-  }, [searchQuery]);
-
-  // Regular Interval Refresh (Only if not searching)
-  useEffect(() => {
-      if (searchQuery.length > 0) return; // Don't refresh while searching
-
-      const interval = setInterval(async () => {
-          const data = await getTopCoins();
-          setCoins(data);
-      }, 15000); // 15 seconds for CoinCap (it's faster)
-
-      return () => clearInterval(interval);
-  }, [searchQuery]);
-
+  }, [searchQuery, isMounted]);
 
   useEffect(() => {
+    if (!isMounted) return;
+    if (searchQuery.length > 0) return;
+
+    const interval = setInterval(async () => {
+        const data = await getTopCoins();
+        setCoins(data);
+    }, 15000);
+
+    return () => clearInterval(interval);
+  }, [searchQuery, isMounted]);
+
+
+  useEffect(() => {
+    if (!isMounted) return;
     if (coins.length === 0 || alerts.length === 0) return;
     const triggeredAlertIds: string[] = [];
     alerts.forEach(alert => {
@@ -163,15 +164,17 @@ const App: React.FC = () => {
     if (triggeredAlertIds.length > 0) {
       setAlerts(prev => prev.filter(a => !triggeredAlertIds.includes(a.id)));
     }
-  }, [coins, alerts]);
+  }, [coins, alerts, isMounted]);
 
   useEffect(() => {
+    if (!isMounted) return;
     localStorage.setItem('nexus_portfolio', JSON.stringify(portfolio));
-  }, [portfolio]);
+  }, [portfolio, isMounted]);
 
   useEffect(() => {
+    if (!isMounted) return;
     localStorage.setItem('nexus_alerts', JSON.stringify(alerts));
-  }, [alerts]);
+  }, [alerts, isMounted]);
 
   const addNotification = (message: string, type: 'success' | 'info') => {
     const id = crypto.randomUUID();
@@ -288,6 +291,14 @@ const App: React.FC = () => {
     }, 1500);
   };
 
+  if (!isMounted) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-900">
+        <div className="text-white text-xl">Yükleniyor...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-900 text-gray-100 font-sans relative">
       
@@ -321,7 +332,6 @@ const App: React.FC = () => {
         ))}
       </div>
 
-      {/* Mobile Header */}
       <div className="md:hidden bg-gray-800 p-4 border-b border-gray-700 flex justify-between items-center sticky top-0 z-50">
         <div className="flex items-center gap-2 font-bold text-xl text-blue-500">
            <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
@@ -332,7 +342,6 @@ const App: React.FC = () => {
         </button>
       </div>
 
-      {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-16 left-0 w-full bg-gray-800 border-b border-gray-700 z-40 p-4 space-y-2 shadow-xl">
              <button onClick={() => { setActiveTab('dashboard'); setIsMobileMenuOpen(false); }} className={`block w-full text-left px-4 py-3 rounded-lg ${activeTab === 'dashboard' ? 'bg-blue-600 text-white' : 'text-gray-400'}`}>Panel</button>
@@ -345,7 +354,6 @@ const App: React.FC = () => {
         </div>
       )}
 
-      {/* Sidebar (Desktop) */}
       <div className="hidden md:flex flex-col w-64 bg-gray-800 border-r border-gray-700 h-screen sticky top-0">
         <div className="p-6 flex items-center gap-2 font-bold text-2xl text-blue-500">
            <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
@@ -408,7 +416,7 @@ const App: React.FC = () => {
                   onClick={() => setActiveTab('premium')}
                   className="bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-lg p-3 text-black text-center cursor-pointer hover:scale-105 transition-transform shadow-lg shadow-yellow-500/20 mb-4"
                 >
-                    <div className="font-bold text-sm">Premium'a Yükselt</div>
+                    <div className="font-bold text-sm">Premium&apos;a Yükselt</div>
                     <div className="text-xs opacity-80">Tüm özelliklerin kilidini aç</div>
                 </div>
             )}
@@ -463,15 +471,37 @@ const App: React.FC = () => {
                    </div>
                 </div>
             )}
+            <PortfolioSection 
+              portfolio={portfolio} 
+              marketData={coins} 
+              onRemove={handleRemoveAsset}
+              fearGreedData={fearGreedData}
+            />
             <GeminiAdvisor portfolio={portfolio} marketData={coins} />
-            <PortfolioSection portfolio={portfolio} marketData={coins} onRemove={handleRemoveAsset} fearGreedData={fearGreedData} />
           </div>
+        )}
+        
+        {activeTab === 'market' && (
+          <MarketTable 
+            data={coins} 
+            isLoading={isLoading} 
+            onAddAsset={handleAddAsset}
+            onViewChart={handleViewChart}
+            portfolio={portfolio}
+          />
+        )}
+        
+        {activeTab === 'chart' && selectedChartCoin && (
+          <TradingChart symbol={selectedChartCoin.symbol} coinName={selectedChartCoin.name} />
+        )}
+        {activeTab === 'chart' && !selectedChartCoin && (
+          <TradingChart symbol="btc" coinName="Bitcoin" />
         )}
 
         {activeTab === 'alerts' && (
           <AlertsSection 
-            marketData={coins} 
-            alerts={alerts} 
+            marketData={coins}
+            alerts={alerts}
             onAddAlert={handleAddAlert}
             onRemoveAlert={handleRemoveAlert}
             isPremium={isPremium}
@@ -483,64 +513,17 @@ const App: React.FC = () => {
           <BlogSection marketData={coins} />
         )}
 
+        {activeTab === 'premium' && (
+          <PremiumSection 
+            isPremium={isPremium}
+            onSubscribe={handleInitiateSubscribe}
+          />
+        )}
+
         {activeTab === 'about' && (
           <AboutSection />
-        )}
-
-        {activeTab === 'premium' && (
-          <PremiumSection onSubscribe={handleInitiateSubscribe} isPremium={isPremium} />
-        )}
-
-        {activeTab === 'chart' && (
-          <div className="h-[600px]">
-             {selectedChartCoin ? (
-                <TradingChart symbol={selectedChartCoin.symbol} coinName={selectedChartCoin.name} onClose={() => setActiveTab('market')} />
-             ) : (
-                <div className="h-full flex flex-col items-center justify-center bg-gray-800 rounded-xl border border-gray-700 border-dashed text-gray-400 p-8">
-                    <svg className="w-16 h-16 mb-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path></svg>
-                    <p className="text-lg">Görüntülemek için bir coin seçin</p>
-                    <button onClick={() => setActiveTab('market')} className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg">Piyasaya Git</button>
-                </div>
-             )}
-          </div>
-        )}
-
-        {(activeTab === 'market' || activeTab === 'dashboard') && (
-           <div className={activeTab === 'dashboard' ? 'mt-8' : ''}>
-               {activeTab === 'dashboard' && <h3 className="text-xl font-bold text-white mb-4">Piyasadan Varlık Ekle</h3>}
-               
-               {activeTab === 'market' && (
-                   <div className="mb-6 relative">
-                       <input 
-                           type="text"
-                           placeholder="Koin Ara (Örn: Kaspa, Pepe, Solana)..."
-                           value={searchQuery}
-                           onChange={(e) => setSearchQuery(e.target.value)}
-                           className="w-full bg-gray-800 border border-gray-700 rounded-xl px-5 py-4 pl-12 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all shadow-lg"
-                       />
-                       <svg className="w-6 h-6 text-gray-500 absolute left-4 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                       </svg>
-                       {isSearching && (
-                           <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-                               <div className="w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-                           </div>
-                       )}
-                   </div>
-               )}
-
-               <MarketTable 
-                 data={coins} 
-                 onAddAsset={handleAddAsset} 
-                 onViewChart={handleViewChart}
-                 isLoading={isLoading && coins.length === 0} 
-                 portfolio={portfolio}
-               />
-           </div>
         )}
       </main>
     </div>
   );
-};
-
-export default App;
+}

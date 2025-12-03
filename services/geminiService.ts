@@ -1,8 +1,4 @@
-import { GoogleGenAI, Type } from "@google/genai";
 import { CoinData, PortfolioItem, GeminiInsight } from "../types";
-
-const apiKey = process.env.API_KEY || '';
-const ai = new GoogleGenAI({ apiKey });
 
 export const analyzePortfolioWithGemini = async (
   portfolio: PortfolioItem[],
@@ -17,7 +13,6 @@ export const analyzePortfolioWithGemini = async (
     }];
   }
 
-  // Construct a summary of the portfolio for the AI
   const portfolioSummary = portfolio.map(item => {
     const coin = marketData.find(c => c.id === item.coinId);
     if (!coin) return null;
@@ -32,41 +27,20 @@ export const analyzePortfolioWithGemini = async (
     };
   }).filter(Boolean);
 
-  const prompt = `
-    Sen kıdemli bir kripto para finans danışmanısın. Aşağıdaki portföyü mevcut piyasa verilerine dayanarak analiz et.
-    Portföy: ${JSON.stringify(portfolioSummary)}
-    
-    Bana 3 adet belirgin içgörü/tavsiye ver. Her içgörü için bir başlık, kısa detaylı bir analiz (içerik), bir duygu durumu (positive, negative, neutral) ve bir tavsiye (buy, sell, hold) sağla.
-    Çeşitlendirme, risk yönetimi ve bu varlıkları etkileyen son piyasa trendlerine odaklan.
-    
-    ÖNEMLİ: Tüm metin yanıtlarını (title, content) TÜRKÇE olarak ver.
-    Yanıtı kesinlikle JSON formatında döndür.
-  `;
-
   try {
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: prompt,
-      config: {
-        responseMimeType: 'application/json',
-        responseSchema: {
-          type: Type.ARRAY,
-          items: {
-            type: Type.OBJECT,
-            properties: {
-              title: { type: Type.STRING },
-              content: { type: Type.STRING },
-              sentiment: { type: Type.STRING, enum: ['positive', 'negative', 'neutral'] },
-              recommendation: { type: Type.STRING, enum: ['buy', 'sell', 'hold'] }
-            }
-          }
-        }
-      }
+    const response = await fetch('/api/gemini/analyze', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ portfolioSummary }),
     });
 
-    const text = response.text;
-    if (!text) return [];
-    return JSON.parse(text) as GeminiInsight[];
+    if (!response.ok) {
+      throw new Error('API request failed');
+    }
+
+    return await response.json() as GeminiInsight[];
   } catch (error) {
     console.error("Gemini analysis failed:", error);
     return [{
@@ -84,23 +58,20 @@ export const chatWithAdvisor = async (
     contextData: string
 ): Promise<string> => {
     try {
-        const chat = ai.chats.create({
-            model: 'gemini-2.5-flash',
-            history: [
-                {
-                    role: 'user',
-                    parts: [{ text: `Sistem Bağlamı: Sen bir kripto uzmanısın. Şu piyasa bağlamını kullan: ${contextData}. Türkçe cevap ver.` }]
-                },
-                {
-                    role: 'model',
-                    parts: [{ text: "Anlaşıldı. Kripto piyasası ve portföyünüz hakkındaki soruları Türkçe olarak yanıtlamaya hazırım." }]
-                },
-                ...history
-            ]
+        const response = await fetch('/api/gemini/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ message, history, contextData }),
         });
 
-        const result = await chat.sendMessage({ message });
-        return result.text || "Bir yanıt oluşturamadım.";
+        if (!response.ok) {
+          throw new Error('API request failed');
+        }
+
+        const data = await response.json();
+        return data.response || "Bir yanıt oluşturamadım.";
     } catch (error) {
         console.error("Chat failed", error);
         return "Üzgünüm, şu anda AI servisine bağlanmakta sorun yaşıyorum.";
