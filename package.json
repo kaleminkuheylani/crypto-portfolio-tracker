@@ -8,7 +8,7 @@
     "start": "next start --hostname 0.0.0.0 --port 5000"
   },
   "dependencies": {
-    "@google/genai": "^1.30.0",
+    "@google/genai": "^1.31.0",
     "autoprefixer": "^10.4.22",
     "lightweight-charts": "^4.1.1",
     "next": "^16.0.7",
