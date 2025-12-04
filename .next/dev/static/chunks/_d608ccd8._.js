@@ -2787,7 +2787,16 @@ const TradingChart = ({ symbol, coinName, onClose })=>{
                         // Eğer veri gelene kadar bileşen silindiyse işlem yapma
                         if (!isMounted || !seriesRef.current) return;
                         if (history.length > 0) {
-                            seriesRef.current.setData(history);
+                            const chartData = history.map({
+                                "TradingChart.useEffect.loadData.chartData": (candle)=>({
+                                        time: candle.time,
+                                        open: candle.open,
+                                        high: candle.high,
+                                        low: candle.low,
+                                        close: candle.close
+                                    })
+                            }["TradingChart.useEffect.loadData.chartData"]);
+                            seriesRef.current.setData(chartData);
                             // Son fiyatı ayarla
                             const last = history[history.length - 1];
                             setCurrentPrice(last.close);
@@ -2799,7 +2808,14 @@ const TradingChart = ({ symbol, coinName, onClose })=>{
                                 // WebSocket mesajı geldiğinde bileşen silinmişse işlem yapma
                                 if (!isMounted || !seriesRef.current) return;
                                 try {
-                                    seriesRef.current.update(candle);
+                                    const chartCandle = {
+                                        time: candle.time,
+                                        open: candle.open,
+                                        high: candle.high,
+                                        low: candle.low,
+                                        close: candle.close
+                                    };
+                                    seriesRef.current.update(chartCandle);
                                     setCurrentPrice(candle.close);
                                     // Basit bir değişim hesaplaması (Mum açılışına göre)
                                     const change = (candle.close - candle.open) / candle.open * 100;
@@ -2856,13 +2872,13 @@ const TradingChart = ({ symbol, coinName, onClose })=>{
                                                 children: "/ USDT"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/TradingChart.tsx",
-                                                lineNumber: 141,
+                                                lineNumber: 154,
                                                 columnNumber: 40
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/TradingChart.tsx",
-                                        lineNumber: 140,
+                                        lineNumber: 153,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2879,7 +2895,7 @@ const TradingChart = ({ symbol, coinName, onClose })=>{
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/TradingChart.tsx",
-                                                lineNumber: 144,
+                                                lineNumber: 157,
                                                 columnNumber: 29
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             priceChange !== 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2892,19 +2908,19 @@ const TradingChart = ({ symbol, coinName, onClose })=>{
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/TradingChart.tsx",
-                                                lineNumber: 148,
+                                                lineNumber: 161,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/TradingChart.tsx",
-                                        lineNumber: 143,
+                                        lineNumber: 156,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/TradingChart.tsx",
-                                lineNumber: 139,
+                                lineNumber: 152,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2912,7 +2928,7 @@ const TradingChart = ({ symbol, coinName, onClose })=>{
                                 children: "CANLI"
                             }, void 0, false, {
                                 fileName: "[project]/components/TradingChart.tsx",
-                                lineNumber: 154,
+                                lineNumber: 167,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2920,13 +2936,13 @@ const TradingChart = ({ symbol, coinName, onClose })=>{
                                 children: "1s"
                             }, void 0, false, {
                                 fileName: "[project]/components/TradingChart.tsx",
-                                lineNumber: 155,
+                                lineNumber: 168,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/TradingChart.tsx",
-                        lineNumber: 138,
+                        lineNumber: 151,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     onClose && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2944,23 +2960,23 @@ const TradingChart = ({ symbol, coinName, onClose })=>{
                                 d: "M6 18L18 6M6 6l12 12"
                             }, void 0, false, {
                                 fileName: "[project]/components/TradingChart.tsx",
-                                lineNumber: 159,
+                                lineNumber: 172,
                                 columnNumber: 104
                             }, ("TURBOPACK compile-time value", void 0))
                         }, void 0, false, {
                             fileName: "[project]/components/TradingChart.tsx",
-                            lineNumber: 159,
+                            lineNumber: 172,
                             columnNumber: 25
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/components/TradingChart.tsx",
-                        lineNumber: 158,
+                        lineNumber: 171,
                         columnNumber: 22
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/TradingChart.tsx",
-                lineNumber: 137,
+                lineNumber: 150,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2973,17 +2989,17 @@ const TradingChart = ({ symbol, coinName, onClose })=>{
                         children: symbol
                     }, void 0, false, {
                         fileName: "[project]/components/TradingChart.tsx",
-                        lineNumber: 167,
+                        lineNumber: 180,
                         columnNumber: 21
                     }, ("TURBOPACK compile-time value", void 0))
                 }, void 0, false, {
                     fileName: "[project]/components/TradingChart.tsx",
-                    lineNumber: 166,
+                    lineNumber: 179,
                     columnNumber: 17
                 }, ("TURBOPACK compile-time value", void 0))
             }, void 0, false, {
                 fileName: "[project]/components/TradingChart.tsx",
-                lineNumber: 165,
+                lineNumber: 178,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2991,13 +3007,13 @@ const TradingChart = ({ symbol, coinName, onClose })=>{
                 children: "Veriler Binance WebSocket API üzerinden gerçek zamanlı sağlanmaktadır. TradingView Lightweight Charts kullanılmaktadır."
             }, void 0, false, {
                 fileName: "[project]/components/TradingChart.tsx",
-                lineNumber: 171,
+                lineNumber: 184,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/components/TradingChart.tsx",
-        lineNumber: 135,
+        lineNumber: 148,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };

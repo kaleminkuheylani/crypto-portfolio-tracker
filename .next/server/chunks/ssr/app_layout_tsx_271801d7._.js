@@ -1,0 +1,3 @@
+module.exports=[33290,a=>{"use strict";var b=a.i(7997);function c({children:a}){return(0,b.jsxs)("html",{lang:"tr",className:"dark",children:[(0,b.jsx)("head",{children:(0,b.jsx)("script",{src:"https://cdn.tailwindcss.com",async:!0})}),(0,b.jsx)("body",{children:a})]})}a.s(["default",()=>c,"metadata",0,{title:"KriptoPusula | Yapay Zeka Destekli Kripto Takibi",description:"Yapay zeka destekli piyasa analizleri, anlık fiyat takibi ve akıllı portföy yönetimi. Kripto yatırımlarınızı Gemini AI ile güçlendirin.",keywords:"kripto, bitcoin, analiz, yapay zeka, portföy takibi, gemini ai, borsa",robots:"index, follow"}])}];
+
+//# sourceMappingURL=app_layout_tsx_271801d7._.js.map

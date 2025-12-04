@@ -1,8 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { createChart, ColorType, IChartApi, ISeriesApi, CrosshairMode } from 'lightweight-charts';
+import { createChart, ColorType, IChartApi, ISeriesApi, CrosshairMode, CandlestickData, Time } from 'lightweight-charts';
 import { getHistoricalCandles, subscribeToTicker } from '../services/binanceService';
-import { CandleData } from '../types';
 
 interface TradingChartProps {
     symbol: string;
@@ -84,7 +83,14 @@ const TradingChart: React.FC<TradingChartProps> = ({ symbol, coinName, onClose }
                 if (!isMounted || !seriesRef.current) return;
 
                 if (history.length > 0) {
-                    seriesRef.current.setData(history);
+                    const chartData = history.map(candle => ({
+                        time: candle.time as Time,
+                        open: candle.open,
+                        high: candle.high,
+                        low: candle.low,
+                        close: candle.close,
+                    }));
+                    seriesRef.current.setData(chartData);
                     // Son fiyatı ayarla
                     const last = history[history.length - 1];
                     setCurrentPrice(last.close);
@@ -98,7 +104,14 @@ const TradingChart: React.FC<TradingChartProps> = ({ symbol, coinName, onClose }
                     if (!isMounted || !seriesRef.current) return;
                     
                     try {
-                        seriesRef.current.update(candle);
+                        const chartCandle = {
+                            time: candle.time as Time,
+                            open: candle.open,
+                            high: candle.high,
+                            low: candle.low,
+                            close: candle.close,
+                        };
+                        seriesRef.current.update(chartCandle);
                         setCurrentPrice(candle.close);
                         
                         // Basit bir değişim hesaplaması (Mum açılışına göre)

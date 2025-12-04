@@ -1,0 +1,91 @@
+The Netlify deploy errored, with the following guidance provided:
+
+- Relevant log lines
+  - The build starts and runs the Next.js build: [line 62](#L62) → [line 64](#L64).
+  - Next.js reports it is creating an optimized production build then the Netlify build exits with a non‑zero code: [line 66](#L66) → [line 68](#L68).
+
+- Diagnosis (error type and cause)
+  - Error type: next build failed (build script returned exit code 2). The Netlify excerpt you provided is truncated and does not show the underlying Next.js error message — Netlify only reports that the Next.js build process failed.
+  - Likely causes (most common for this symptom):
+    1. A Next.js build error (syntax/TypeScript error, missing env var, module not found, server‑side only import like window/DOM/crypto) surfaced during next build and caused it to exit non‑zero.
+    2. Incompatibility between the Next.js Turbopack build (Next 16) and the Netlify environment / plugin, causing the build to fail silently.
+    3. Node version mismatch in your build environment (less likely here because the logs show Node v22.21.1 was used, but still possible depending on package native bindings).
+
+- Immediate actionable solution
+  1. Reproduce the full error locally to see the exact build failure (this will reveal whether it’s a missing package, runtime error at build time, or Turbopack / Node incompatibility):
+     - On your machine (use the same Node version Netlify used: v22.21.1) run:
+     ```bash
+     # from repo root
+     npm ci
+     npm run build
+     ```
+     - Copy the full error output from next build. That output will point to the exact file/line and cause (module not found / syntax error / missing env var, etc.).
+     - If you cannot reproduce locally, enable verbose logs on Netlify by running the same build command locally in CI or by adding verbose flags while reproducing remotely.
+
+  2. Common fixes depending on the local error you will see:
+     - If the error is "Module not found" or similar:
+       - First verify the package is present in package.json or that the imported file was committed to the repo (check package.json here: https://github.com/kaleminkuheylani/crypto-portfolio-tracker/blob/main/package.json).
+       - If the package/file is present but the build still complains because it needs to be treated as external (rollup/ESM bundling edge case), only then consider adding it to an external config (e.g., build.rollupOptions.external). But do the verification step above first.
+     - If the error mentions missing environment variables used at build time (e.g., API keys accessed during getStaticProps/getServerSideProps):
+       - Add those env vars to Netlify (Site settings → Build & deploy → Environment → Environment variables) and re-run the deploy.
+     - If the error is a runtime error at build time (e.g., window or DOM access during SSR):
+       - Guard client-only code with a browser check (typeof window !== 'undefined') or move it into useEffect so it runs only on the client.
+     - If the error is caused by Next.js 16 Turbopack incompatibility on Netlify:
+       - Try disabling Turbopack in the Netlify build environment to force webpack (this is a pragmatic quick fix to confirm Turbopack is the problem). In Netlify, set an environment variable for the site:
+         - Key: NEXT_PRIVATE_TURBOPACK
+         - Value: false
+       - Or change the build command to explicitly disable turbopack for the build step:
+         ```bash
+         NEXT_PRIVATE_TURBOPACK=false npm run build
+         ```
+       - Re-deploy. If this fixes the build, you can keep webpack until Netlify and Next.js Turbopack support matures for your setup.
+  3. If you suspect Node version mismatch (if local reproduction reports Node version issues), change the Node version used by Netlify. See Netlify docs for changing Node versions:
+     - https://docs.netlify.com/configure-builds/manage-dependencies/#node-js-and-javascript
+
+- If you want me to be specific about the fix:
+  - Run npm run build locally and paste the full next build error output here. With that exact error I will give the precise code change or Netlify setting to make to resolve the failure.
+
+The relevant error logs are:
+
+Line 0: build-image version: cc7730f6f332688234781c0852e824dedc2337ca (noble)
+Line 1: buildbot version: cc7730f6f332688234781c0852e824dedc2337ca
+Line 2: Fetching cached dependencies
+Line 3: Failed to fetch cache, continuing with build
+Line 4: Starting to prepare the repo for build
+Line 5: git clone --filter=blob:none https://github.com/kaleminkuheylani/crypto-portfolio-tracker
+Line 6: No cached dependencies found. Cloning fresh repo
+Line 7: Preparing Git Reference refs/heads/main
+Line 8: Starting to install dependencies
+Line 9: v22.21.1 is already installed.
+Line 10: Now using node v22.21.1 (npm v10.9.4)
+Line 11: Enabling Node.js Corepack
+Line 12: Started restoring cached build plugins
+Line 13: Finished restoring cached build plugins
+Line 14: Started restoring cached corepack dependencies
+Line 15: Finished restoring cached corepack dependencies
+Line 16: No npm workspaces detected
+Line 17: Started restoring cached node modules
+Line 18: Finished restoring cached node modules
+Line 19: Installing npm packages using npm version 10.9.4
+Line 20: npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+Line 21: added 223 packages in 12s
+Line 22: npm packages installed
+Line 23: Successfully installed dependencies
+Line 24: Starting build script
+Line 25: Detected 1 framework(s)
+Line 26: "next" at version "16.0.7"
+Line 27: Section completed: initializing
+Line 28: [96m[1m​[22m[39m
+Line 29: [96m[1mNetlify Build                                                 [22m[39m
+Line 30: [96m[1m────────────────────────────────────────────────────────────────[22m[39m
+Line 58: [96m[1m​[22m[39m
+Line 59: [96m[1mBuild command from Netlify app                                [22m[39m
+Line 60: [96m[1m────────────────────────────────────────────────────────────────[22m[39m
+Line 61: ​
+Line 62: [36m$ npm run build[39m
+Line 63: > kriptopusula@0.0.0 build
+Line 64: > next build
+Line 65: [33m[1m⚠[22m[39m No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/doc
+Line 66:    [1m[38;2;173;127;168m▲ Next.js 16.0.7[39m[22m (Turbopack)
+Line 67:  [37m[1m [22m[39m Creating an optimized production build ...
+Line 68: Failed during stage 'building site': Build script returned non-zero exit code: 2
