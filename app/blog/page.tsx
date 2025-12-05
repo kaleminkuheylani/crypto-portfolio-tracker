@@ -95,10 +95,7 @@ export default function BlogPage() {
       <header className="bg-gray-800 border-b border-gray-700 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 font-bold text-xl text-blue-500 hover:text-blue-400 transition-colors">
-            <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-              <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-            </svg>
+            <img src="/logo.png" alt="KriptoPusula Logo" className="w-10 h-10 object-contain" />
             KriptoPusula
           </Link>
           <nav className="flex items-center gap-4">
