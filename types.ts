@@ -109,3 +109,39 @@ export interface FearGreedData {
   timestamp: string;
   time_until_update?: string;
 }
+
+export interface MarketSentiment {
+  overall: 'bullish' | 'bearish' | 'neutral';
+  score: number;
+  sources: {
+    reddit: {
+      sentiment: 'bullish' | 'bearish' | 'neutral';
+      score: number;
+      mentions: number;
+    };
+    sentcrypt: {
+      sentiment: 'bullish' | 'bearish' | 'neutral';
+      score: number;
+      confidence: number;
+    };
+    fearGreed: {
+      sentiment: 'bullish' | 'bearish' | 'neutral';
+      value: number;
+      classification: string;
+    };
+  };
+  lastUpdated: string;
+}
+
+export interface PredictionData {
+  coinId: string;
+  coinName: string;
+  coinSymbol: string;
+  prediction: 'bullish' | 'bearish' | 'neutral';
+  confidence: number;
+  analysis: string;
+  targetPrice?: number;
+  timeframe: string;
+  createdAt: string;
+  expiresAt: string;
+}

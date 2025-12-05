@@ -1,4 +1,4 @@
-import { CoinData, FearGreedData } from '../types';
+import { CoinData, FearGreedData, MarketSentiment } from '../types';
 
 export const getTopCoins = async (): Promise<CoinData[]> => {
   try {
@@ -43,6 +43,21 @@ export const getFearAndGreedIndex = async (): Promise<FearGreedData | null> => {
     return await response.json();
   } catch (error) {
     console.error("Failed to fetch Fear & Greed index:", error);
+    return null;
+  }
+};
+
+export const getMarketSentiment = async (): Promise<MarketSentiment | null> => {
+  try {
+    const response = await fetch('/api/crypto?action=sentiment');
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch market sentiment');
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error("Failed to fetch market sentiment:", error);
     return null;
   }
 };

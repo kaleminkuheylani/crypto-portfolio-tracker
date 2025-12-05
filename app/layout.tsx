@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }): React.JSX.Element {
   return (
-    <html lang="tr" className="dark">
+    <html lang="tr">
       <head>
         <script src="https://cdn.tailwindcss.com" async></script>
       </head>

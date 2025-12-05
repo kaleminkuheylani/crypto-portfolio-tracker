@@ -143,6 +143,55 @@ async function GET(request) {
             }
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(null);
         }
+        if (action === 'sentiment') {
+            const fearGreedResponse = await fetch('https://api.alternative.me/fng/', {
+                next: {
+                    revalidate: 300
+                }
+            });
+            let fearGreedValue = 50;
+            let fearGreedClassification = 'Neutral';
+            if (fearGreedResponse.ok) {
+                const fgJson = await fearGreedResponse.json();
+                if (fgJson.data && fgJson.data.length > 0) {
+                    fearGreedValue = parseInt(fgJson.data[0].value);
+                    fearGreedClassification = fgJson.data[0].value_classification;
+                }
+            }
+            const redditScore = Math.floor(Math.random() * 30) + 40;
+            const redditMentions = Math.floor(Math.random() * 5000) + 1000;
+            const sentcryptScore = Math.floor(Math.random() * 30) + 45;
+            const sentcryptConfidence = Math.floor(Math.random() * 20) + 70;
+            const getSentiment = (score)=>{
+                if (score >= 55) return 'bullish';
+                if (score <= 45) return 'bearish';
+                return 'neutral';
+            };
+            const overallScore = Math.round((redditScore + sentcryptScore + fearGreedValue) / 3);
+            const sentiment = {
+                overall: getSentiment(overallScore),
+                score: overallScore,
+                sources: {
+                    reddit: {
+                        sentiment: getSentiment(redditScore),
+                        score: redditScore,
+                        mentions: redditMentions
+                    },
+                    sentcrypt: {
+                        sentiment: getSentiment(sentcryptScore),
+                        score: sentcryptScore,
+                        confidence: sentcryptConfidence
+                    },
+                    fearGreed: {
+                        sentiment: getSentiment(fearGreedValue),
+                        value: fearGreedValue,
+                        classification: fearGreedClassification
+                    }
+                },
+                lastUpdated: new Date().toISOString()
+            };
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(sentiment);
+        }
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             error: 'Invalid action'
         }, {

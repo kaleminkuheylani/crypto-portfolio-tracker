@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { GoogleGenAI, Type } from "@google/genai";
+import { GoogleGenAI } from "@google/genai";
 
 const apiKey = process.env.GEMINI_API_KEY || '';
 const ai = new GoogleGenAI({ apiKey });
@@ -81,26 +81,8 @@ export async function POST(request: NextRequest) {
     `;
 
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: prompt,
-      config: {
-        responseMimeType: 'application/json',
-        responseSchema: {
-          type: Type.OBJECT,
-          properties: {
-            title: { type: Type.STRING },
-            slug: { type: Type.STRING },
-            metaDescription: { type: Type.STRING },
-            summary: { type: Type.STRING },
-            htmlContent: { type: Type.STRING },
-            content: { type: Type.STRING },
-            author: { type: Type.STRING },
-            readTime: { type: Type.STRING },
-            tags: { type: Type.ARRAY, items: { type: Type.STRING } },
-            keywords: { type: Type.ARRAY, items: { type: Type.STRING } }
-          }
-        }
-      }
+      model: 'gemini-2.0-flash-001',
+      contents: prompt
     });
 
     const text = response.text;
@@ -108,7 +90,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'No response from AI' }, { status: 500 });
     }
 
-    const data = JSON.parse(text);
+    let jsonMatch = text.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) {
+      return NextResponse.json({ error: 'Failed to parse response' }, { status: 500 });
+    }
+
+    const data = JSON.parse(jsonMatch[0]);
 
     const blogPost = {
       id: crypto.randomUUID(),
