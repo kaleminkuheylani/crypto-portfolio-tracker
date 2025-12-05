@@ -117,11 +117,51 @@ export async function GET(request: NextRequest) {
         }
       }
 
-      const redditScore = Math.floor(Math.random() * 30) + 40;
-      const redditMentions = Math.floor(Math.random() * 5000) + 1000;
+      let redditScore = 50;
+      let redditMentions = 0;
       
-      const sentcryptScore = Math.floor(Math.random() * 30) + 45;
-      const sentcryptConfidence = Math.floor(Math.random() * 20) + 70;
+      try {
+        const coingeckoResponse = await fetch(
+          'https://api.coingecko.com/api/v3/search/trending',
+          { next: { revalidate: 600 } }
+        );
+        
+        if (coingeckoResponse.ok) {
+          const trendingData = await coingeckoResponse.json();
+          if (trendingData.coins && trendingData.coins.length > 0) {
+            redditMentions = trendingData.coins.reduce((sum: number, coin: any) => 
+              sum + (coin.item?.score || 0), 0
+            );
+            const avgMarketCapRank = trendingData.coins.reduce((sum: number, coin: any) => 
+              sum + (coin.item?.market_cap_rank || 100), 0
+            ) / trendingData.coins.length;
+            redditScore = Math.min(80, Math.max(20, 100 - avgMarketCapRank));
+          }
+        }
+      } catch (e) {
+        console.error('CoinGecko trending error:', e);
+      }
+
+      let sentcryptScore = 50;
+      let sentcryptConfidence = 75;
+      
+      try {
+        const globalResponse = await fetch(
+          'https://api.coingecko.com/api/v3/global',
+          { next: { revalidate: 300 } }
+        );
+        
+        if (globalResponse.ok) {
+          const globalData = await globalResponse.json();
+          if (globalData.data) {
+            const marketCapChange = globalData.data.market_cap_change_percentage_24h_usd || 0;
+            sentcryptScore = Math.min(90, Math.max(10, 50 + (marketCapChange * 5)));
+            sentcryptConfidence = Math.min(95, Math.max(60, 80 + Math.abs(marketCapChange)));
+          }
+        }
+      } catch (e) {
+        console.error('CoinGecko global error:', e);
+      }
 
       const getSentiment = (score: number): 'bullish' | 'bearish' | 'neutral' => {
         if (score >= 55) return 'bullish';
@@ -137,13 +177,13 @@ export async function GET(request: NextRequest) {
         sources: {
           reddit: {
             sentiment: getSentiment(redditScore),
-            score: redditScore,
+            score: Math.round(redditScore),
             mentions: redditMentions
           },
           sentcrypt: {
             sentiment: getSentiment(sentcryptScore),
-            score: sentcryptScore,
-            confidence: sentcryptConfidence
+            score: Math.round(sentcryptScore),
+            confidence: Math.round(sentcryptConfidence)
           },
           fearGreed: {
             sentiment: getSentiment(fearGreedValue),
