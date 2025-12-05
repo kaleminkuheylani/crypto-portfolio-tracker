@@ -9,6 +9,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://kriptopusula.replit.app'),
   title: {
     default: 'KriptoPusula | Yapay Zeka Destekli Kripto Takibi',
     template: '%s | KriptoPusula'
@@ -65,7 +66,6 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <head>
-        <script src="https://cdn.tailwindcss.com" async></script>
         <link rel="canonical" href="https://kriptopusula.com" />
       </head>
       <body>{children}</body>
