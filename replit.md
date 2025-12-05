@@ -4,6 +4,12 @@
 KriptoPusula is a cryptocurrency portfolio tracking application built with Next.js. It provides real-time market data, portfolio management, AI-powered investment insights, technical charts, price alerts, and an AI-generated blog section. The application operates as a non-profit initiative focused on crypto education.
 
 ## Recent Changes
+- **2025-12-05**: Enhanced Binance service with multiple proxy fallbacks and mock data generation for regional blocking
+- **2025-12-05**: Added metadataBase for proper SEO image resolution
+- **2025-12-05**: Removed Tailwind CDN in favor of PostCSS build
+- **2025-12-05**: Created dynamic routing: /blog/[slug], /grafik/[symbol], /piyasa/[coin], /hakkimizda
+- **2025-12-05**: Enhanced TradingChart with timeframes (1m-1w), indicators (MA, EMA, RSI, MACD, Bollinger Bands), volume display
+- **2025-12-05**: Added SEO: robots.txt, manifest.json, structured data, meta tags
 - **2025-12-05**: Converted entire UI from dark theme to white/light theme
 - **2025-12-05**: Removed sidebar, implemented horizontal top navigation bar
 - **2025-12-05**: Removed all premium/paid features (PremiumModal, PaymentModal, portfolio limits)
@@ -27,8 +33,12 @@ KriptoPusula is a cryptocurrency portfolio tracking application built with Next.
 ```
 kriptopusula/
 ├── app/                    # Next.js App Router pages
-│   ├── layout.tsx         # Root layout
+│   ├── layout.tsx         # Root layout with SEO metadata
 │   ├── page.tsx           # Main app entry (client component)
+│   ├── blog/[slug]/       # Dynamic blog pages with SEO
+│   ├── grafik/[symbol]/   # Dynamic chart pages with indicators
+│   ├── piyasa/[coin]/     # Dynamic market detail pages
+│   ├── hakkimizda/        # About page
 │   └── api/               # API Routes (server-side)
 │       ├── crypto/        # Crypto data proxy (CoinPaprika, F&G, Sentiment)
 │       ├── gemini/        # Gemini AI endpoints
