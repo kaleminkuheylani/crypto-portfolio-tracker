@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { CoinData, PortfolioItem } from '../types';
 
 interface MarketTableProps {
@@ -66,9 +67,14 @@ const MarketTable: React.FC<MarketTableProps> = ({ data, onAddAsset, onViewChart
                           className="w-8 h-8 rounded-full bg-gray-100 object-cover"
                       />
                       <div>
-                        <div className="font-bold text-gray-900">{coin.name}</div>
-                        <div className="text-xs uppercase text-gray-400">{coin.symbol}</div>
+                        <Link href={`/piyasa/${coin.id}`} className="font-bold text-gray-900 hover:text-blue-600 hover:underline">
+                          {coin.name}
+                        </Link>
+                        <Link href={`/piyasa/${coin.id}`} className="text-xs uppercase text-gray-400 hover:text-blue-600 hover:underline">
+                          {coin.symbol}
+                        </Link>
                       </div>
+
                     </div>
                   </td>
                   <td className="px-6 py-4 text-right font-medium text-gray-900 font-mono">

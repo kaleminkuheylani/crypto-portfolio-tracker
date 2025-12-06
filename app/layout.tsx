@@ -9,13 +9,13 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://kriptopusula.replit.app'),
+  metadataBase: new URL('https://kriptopusula.com'),
   title: {
     default: 'KriptoPusula | Yapay Zeka Destekli Kripto Takibi',
     template: '%s | KriptoPusula'
   },
-  description: 'Yapay zeka destekli piyasa analizleri, anlik fiyat takibi ve akilli portfoy yonetimi. Kripto yatirimlarinizi Gemini AI ile guclendirin.',
-  keywords: ['kripto', 'bitcoin', 'ethereum', 'analiz', 'yapay zeka', 'portfoy takibi', 'gemini ai', 'borsa', 'kripto para', 'yatirim'],
+  description: 'Yapay zeka destekli piyasa analizleri, canlı fiyat takibi ve akıllı portföy yönetimi. Kripto yatırımlarınızı Gemini AI ile güçlendirin.',
+  keywords: ['kripto', 'bitcoin', 'ethereum', 'analiz', 'yapay zeka', 'portföy takibi', 'gemini ai', 'borsa', 'kripto para', 'yatırım', 'fiyat takibi'],
   authors: [{ name: 'KriptoPusula' }],
   creator: 'KriptoPusula',
   publisher: 'KriptoPusula',
@@ -33,9 +33,10 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'tr_TR',
+    url: 'https://kriptopusula.com',
     siteName: 'KriptoPusula',
     title: 'KriptoPusula | Yapay Zeka Destekli Kripto Takibi',
-    description: 'Yapay zeka destekli piyasa analizleri, anlik fiyat takibi ve akilli portfoy yonetimi.',
+    description: 'Yapay zeka destekli piyasa analizleri, canlı fiyat takibi ve akıllı portföy yönetimi.',
     images: [
       {
         url: '/logo.png',
@@ -48,8 +49,9 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'KriptoPusula | Yapay Zeka Destekli Kripto Takibi',
-    description: 'Yapay zeka destekli piyasa analizleri, anlik fiyat takibi ve akilli portfoy yonetimi.',
+    description: 'Yapay zeka destekli piyasa analizleri, canlı fiyat takibi ve akıllı portföy yönetimi.',
     images: ['/logo.png'],
+    creator: '@kriptopusula',
   },
   icons: {
     icon: '/logo.png',
@@ -67,6 +69,7 @@ export default function RootLayout({
     <html lang="tr">
       <head>
         <link rel="canonical" href="https://kriptopusula.com" />
+        <meta name="google-site-verification" content="lzwuDrHLjD2upb3dKLjyam-lmu9uQRnTzHnNHx7tBBE" />
       </head>
       <body>{children}</body>
     </html>

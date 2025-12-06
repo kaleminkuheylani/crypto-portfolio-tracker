@@ -1,4 +1,5 @@
 import { BlogPost, CoinData } from "../types";
+import { fetchSanityBlogPosts, mergeBlogPosts } from "./sanityService";
 
 const STORAGE_KEY = 'kriptopusula_blog_db';
 
@@ -92,6 +93,14 @@ export const initializeBlogSystem = async (marketData: CoinData[]): Promise<Blog
             posts = [newPost, ...posts];
             savePosts(posts);
         }
+    }
+
+    // Fetch manual posts from Sanity CMS and merge with AI posts
+    try {
+        const sanityPosts = await fetchSanityBlogPosts();
+        posts = mergeBlogPosts(posts, sanityPosts);
+    } catch (error) {
+        console.warn("Sanity CMS entegrasyon hatası:", error);
     }
 
     return posts;

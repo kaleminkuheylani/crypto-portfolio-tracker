@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { getTopCoins } from '../../services/cryptoApi';
 import { CoinData, BlogPost } from '../../types';
 import { initializeBlogSystem } from '../../services/blogService';
+import AdminPanel from '../../components/AdminPanel';
 
 export default function BlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -56,6 +57,16 @@ export default function BlogPage() {
     }
   }, [selectedPost, isMounted]);
 
+  const addManualPost = (newPost: BlogPost) => {
+    const updatedPosts = [newPost, ...posts];
+    setPosts(updatedPosts);
+    
+    // Save to localStorage
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('kriptopusula_blog_db', JSON.stringify(updatedPosts));
+    }
+  };
+
   const getCategoryColor = (category: string) => {
     switch(category) {
       case 'tahmin': return 'bg-yellow-600/90 text-yellow-100';
@@ -63,6 +74,17 @@ export default function BlogPage() {
       case 'haber': return 'bg-blue-600/90 text-blue-100';
       default: return 'bg-gray-600/90 text-gray-100';
     }
+  };
+
+  const getSourceBadge = (postId: string) => {
+    if (postId.startsWith('manual-')) {
+      return (
+        <span className="ml-2 bg-green-600/90 text-green-100 text-xs font-bold px-2 py-1 rounded-full">
+          Manuel
+        </span>
+      );
+    }
+    return null;
   };
 
   const renderSchema = (post: BlogPost) => {
@@ -156,6 +178,7 @@ export default function BlogPage() {
                     <span className={`${getCategoryColor(post.category)} text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm uppercase`}>
                       {post.category}
                     </span>
+                    {getSourceBadge(post.id)}
                   </div>
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
@@ -180,7 +203,7 @@ export default function BlogPage() {
                   <footer className="flex items-center justify-between mt-auto pt-4 border-t border-gray-700">
                     <span className="text-sm font-medium text-gray-300 flex items-center gap-2">
                       <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-full flex items-center justify-center text-[10px] text-white">
-                        AI
+                        {post.id.startsWith('manual-') ? 'Y' : 'AI'}
                       </div>
                       {post.author}
                     </span>
@@ -199,6 +222,16 @@ export default function BlogPage() {
         <div className="max-w-7xl mx-auto px-4 py-8 text-center text-gray-400 text-sm">
           <p>KriptoPusula - Yapay Zeka Destekli Kripto Takibi</p>
           <p className="mt-2 text-xs">Bu içerikler yapay zeka tarafından oluşturulmuştur ve yatırım tavsiyesi niteliği taşımaz.</p>
+          <p className="mt-4">
+            <a 
+              href="https://buyacoffe.me/KriptoSavsi" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:text-blue-300 font-medium"
+            >
+              ☕ Projeyi desteklemek için bir kahve satın al
+            </a>
+          </p>
         </div>
       </footer>
 
@@ -229,6 +262,7 @@ export default function BlogPage() {
                 <span className={`${getCategoryColor(selectedPost.category)} text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm uppercase mb-2 inline-block`}>
                   {selectedPost.category}
                 </span>
+                {getSourceBadge(selectedPost.id)}
               </div>
             </div>
             
@@ -245,11 +279,11 @@ export default function BlogPage() {
               <div className="flex items-center justify-between border-b border-gray-800 pb-6 mb-6">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
-                    AI
+                    {selectedPost.id.startsWith('manual-') ? 'Y' : 'AI'}
                   </div>
                   <div>
                     <div className="text-white font-medium">{selectedPost.author}</div>
-                    <div className="text-gray-400 text-xs">Yapay Zeka Editörü</div>
+                    <div className="text-gray-400 text-xs">{selectedPost.id.startsWith('manual-') ? 'Manuel Yazar' : 'Yapay Zeka Editörü'}</div>
                   </div>
                 </div>
                 <div className="text-right text-gray-400 text-sm">
@@ -266,12 +300,15 @@ export default function BlogPage() {
               />
 
               <div className="mt-8 pt-6 border-t border-gray-800 text-xs text-gray-500 text-center italic">
-                Bu içerik yapay zeka tarafından oluşturulmuştur ve yatırım tavsiyesi niteliği taşımaz.
+                Bu içerik {selectedPost.id.startsWith('manual-') ? 'manuel olarak oluşturulmuştur' : 'yapay zeka tarafından üretilmiştir'} ve yatırım tavsiyesi niteliği taşımaz.
               </div>
             </article>
           </div>
         </div>
       )}
+
+      {/* Admin Panel for adding manual posts */}
+      <AdminPanel onAddPost={addManualPost} />
 
       <style jsx global>{`
         @keyframes scale-in {

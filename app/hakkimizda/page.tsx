@@ -153,6 +153,16 @@ export default function HakkimizdaPage() {
       <footer className="bg-gray-50 border-t border-gray-200 mt-12">
         <div className="max-w-7xl mx-auto px-4 py-8 text-center text-gray-500 text-sm">
           <p>KriptoPusula - Kar amaci gutmeyen, topluluk odakli kripto egitim platformu</p>
+          <p className="mt-2">
+            <a 
+              href="https://buyacoffe.me/KriptoSavsi" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:text-blue-800 font-medium"
+            >
+              ☕ Projeyi desteklemek icin bir kahve satin al
+            </a>
+          </p>
           <p className="mt-2">&copy; {new Date().getFullYear()} KriptoPusula. Tum haklari saklidir.</p>
         </div>
       </footer>

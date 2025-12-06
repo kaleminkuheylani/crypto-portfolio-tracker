@@ -424,6 +424,7 @@ export default function Home() {
           <div className="text-center text-gray-500 text-sm">
             <p>KriptoPusula - Kar amaci gutmeyen, topluluk odakli kripto egitim platformu</p>
             <p className="mt-2">Veriler CoinPaprika ve Binance tarafindan saglanmaktadir. AI ongoruleri Google Gemini ile guclendirilmistir.</p>
+            <p className="mt-2"><a href="https://buyacoffe.me/KriptoSavsi" target="_blank" rel="noopener noreferrer">☕ Projeyi desteklemek icin bir kahve satin al</a></p>
             <p className="mt-2">&copy; {new Date().getFullYear()} KriptoPusula. Tum haklari saklidir.</p>
           </div>
         </div>
