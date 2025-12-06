@@ -27,19 +27,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       });
       
       return {
-        title: `${coinName} (${upperSymbol}) Canlı Grafik ve Teknik Analiz | KriptoPusula`,
+        title: `${coinName} (${upperSymbol}) Canlı Grafik ve Teknik Analiz | KriptoSavası`,
         description: `${coinName} (${upperSymbol})/${upperSymbol}USDT canlı fiyat grafiği, teknik analiz araçları ve gerçek zamanlı piyasa verileri. ${price} güncel fiyatı ile profesyonel kripto grafik platformu.`,
         keywords: [`${upperSymbol}`, `${coinName}`, 'kripto grafik', 'canlı fiyat', 'teknik analiz', 'BTC', 'ETH', 'SOL', 'grafik', 'kripto para'],
         openGraph: {
-          title: `${coinName} (${upperSymbol}) Canlı Grafik | KriptoPusula`,
+          title: `${coinName} (${upperSymbol}) Canlı Grafik | KriptoSavası`,
           description: `${coinName} (${upperSymbol})/${upperSymbol}USDT canlı fiyat grafiği ve teknik analiz araçları. ${price} güncel fiyatı.`,
           type: 'website',
-          siteName: 'KriptoPusula',
-          url: `https://kriptopusula.com/grafik/${symbol}`,
+          siteName: 'KriptoSavası',
+          url: `https://kriptosavasi.com/grafik/${symbol}`,
         },
         twitter: {
           card: 'summary_large_image',
-          title: `${coinName} (${upperSymbol}) Canlı Grafik | KriptoPusula`,
+          title: `${coinName} (${upperSymbol}) Canlı Grafik | KriptoSavası`,
           description: `${coinName} (${upperSymbol})/${upperSymbol}USDT canlı fiyat grafiği. ${price} güncel fiyatı.`,
         },
         robots: {
@@ -54,19 +54,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   
   // Fallback metadata
   return {
-    title: `${upperSymbol} Canlı Grafik | KriptoPusula`,
+    title: `${upperSymbol} Canlı Grafik | KriptoSavası`,
     description: `${upperSymbol}/USDT canlı fiyat grafiği, teknik analiz araçları ve gerçek zamanlı piyasa verileri. Profesyonel kripto grafik platformu.`,
     keywords: [`${upperSymbol}`, 'kripto grafik', 'canlı fiyat', 'teknik analiz', 'binance', 'trading'],
     openGraph: {
-      title: `${upperSymbol} Canlı Grafik | KriptoPusula`,
+      title: `${upperSymbol} Canlı Grafik | KriptoSavası`,
       description: `${upperSymbol}/USDT canlı fiyat grafiği ve teknik analiz araçları.`,
       type: 'website',
-      siteName: 'KriptoPusula',
-      url: `https://kriptopusula.com/grafik/${symbol}`,
+      siteName: 'KriptoSavası',
+      url: `https://kriptosavasi.com/grafik/${symbol}`,
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${upperSymbol} Canlı Grafik | KriptoPusula`,
+      title: `${upperSymbol} Canlı Grafik | KriptoSavası`,
     },
     robots: {
       index: true,

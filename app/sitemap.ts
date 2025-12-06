@@ -1,7 +1,7 @@
 import { getTopCoins } from '../services/cryptoApi';
 
 export default async function sitemap() {
-  const baseUrl = 'https://kriptopusula.com';
+  const baseUrl = 'https://kriptosavasi.com';
   
   // Static pages
   const staticPages = [
@@ -19,22 +19,30 @@ export default async function sitemap() {
   const coinPages = [];
   try {
     const coins = await getTopCoins();
-    // Limit to top 100 coins to avoid huge sitemap
+    // Limit to top 100 coins to provide better coverage while avoiding huge sitemap
     const topCoins = coins.slice(0, 100);
     
-    for (const coin of topCoins) {
+    for (const [index, coin] of topCoins.entries()) {
+      // Calculate priority based on market cap rank (higher rank = higher priority)
+      // Top 10 coins get priority 0.9, next 20 get 0.8, rest get 0.7
+      let priority = 0.7;
+      if (index < 10) priority = 0.9;
+      else if (index < 30) priority = 0.8;
+      
+      // Main coin detail page
       coinPages.push({
         url: `${baseUrl}/piyasa/${coin.id}`,
         lastModified: new Date(),
         changeFrequency: 'hourly',
-        priority: 0.9,
+        priority: priority,
       });
       
+      // Chart page for the coin
       coinPages.push({
         url: `${baseUrl}/grafik/${coin.symbol.toLowerCase()}`,
         lastModified: new Date(),
         changeFrequency: 'hourly',
-        priority: 0.7,
+        priority: priority - 0.2, // Charts are slightly less important
       });
     }
   } catch (error) {

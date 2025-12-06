@@ -65,7 +65,7 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
       },
       "publisher": {
         "@type": "Organization",
-        "name": "KriptoPusula",
+        "name": "KriptoSavasi",
         "logo": {
           "@type": "ImageObject",
           "url": "/logo.png"
@@ -100,8 +100,8 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
         <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
           <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2 font-bold text-xl text-blue-600 hover:text-blue-500 transition-colors">
-              <img src="/logo.png" alt="KriptoPusula Logo" className="w-10 h-10 object-contain" />
-              KriptoPusula
+              <img src="/logo.png" alt="KriptoSavasi Logo" className="w-10 h-10 object-contain" />
+              KriptoSavasi
             </Link>
             <nav className="flex items-center gap-4">
               <Link href="/" className="text-gray-500 hover:text-gray-900 transition-colors text-sm">
@@ -136,8 +136,8 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
       <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 font-bold text-xl text-blue-600 hover:text-blue-500 transition-colors">
-            <img src="/logo.png" alt="KriptoPusula Logo" className="w-10 h-10 object-contain" />
-            KriptoPusula
+            <img src="/logo.png" alt="KriptoSavasi Logo" className="w-10 h-10 object-contain" />
+            KriptoSavasi    
           </Link>
           <nav className="flex items-center gap-4">
             <Link href="/" className="text-gray-500 hover:text-gray-900 transition-colors text-sm">
@@ -250,7 +250,7 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
 
       <footer className="bg-gray-50 border-t border-gray-200 mt-12">
         <div className="max-w-7xl mx-auto px-4 py-8 text-center text-gray-500 text-sm">
-          <p>KriptoPusula - Yapay Zeka Destekli Kripto Takibi</p>
+          <p>KriptoSavasi - Yapay Zeka Destekli Kripto Takibi</p>
           <p className="mt-2 text-xs">Bu icerikler yapay zeka tarafindan olusturulmustur ve yatirim tavsiyesi niteligi tasimaz.</p>
         </div>
       </footer>

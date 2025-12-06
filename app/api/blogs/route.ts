@@ -120,7 +120,7 @@ export async function POST(request: NextRequest) {
              "summary": "String (Kısa özet)",
              "htmlContent": "String (HTML etiketli içerik)",
              "content": "String (Düz metin)",
-             "author": "KriptoPusula AI",
+             "author": "KriptoSavasi AI",
              "readTime": "String (örn: 5 dk)",
              "tags": ["String", "String"],
              "keywords": ["String", "String"]
@@ -166,7 +166,7 @@ export async function POST(request: NextRequest) {
         summary: data.summary,
         htmlContent: data.htmlContent || `<p>${data.content}</p>`,
         content: data.content,
-        author: data.author || 'KriptoPusula AI',
+        author: data.author || 'KriptoSavasi AI',
         date: today,
         readTime: data.readTime,
         imageUrl: IMAGE_POOL[Math.floor(Math.random() * IMAGE_POOL.length)],

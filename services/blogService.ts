@@ -1,7 +1,7 @@
 import { BlogPost, CoinData } from "../types";
 import { fetchSanityBlogPosts, mergeBlogPosts } from "./sanityService";
 
-const STORAGE_KEY = 'kriptopusula_blog_db';
+const STORAGE_KEY = 'kriptosavasi_blog_db';
 
 const IMAGE_POOL = [
     "https://images.unsplash.com/photo-1621761191319-c6fb62004040?q=80&w=1000&auto=format&fit=crop",
@@ -29,9 +29,9 @@ const getTodayDateString = () => {
 
 const getDailyPostType = (): 'tahmin' | 'analiz' | 'haber' => {
     const day = new Date().getDay();
-    if (day === 6) return 'analiz';
-    if (day === 0) return 'haber';
-    return 'tahmin';
+    if (day === 6) return 'analiz'; // Saturday
+    if (day === 0) return 'haber';  // Sunday
+    return 'tahmin'; // Monday-Friday
 };
 
 const generateSinglePost = async (
@@ -61,7 +61,7 @@ const generateSinglePost = async (
 
 const seedInitialPosts = async (marketData: CoinData[]): Promise<BlogPost[]> => {
     const posts: BlogPost[] = [];
-    const seedPost = await generateSinglePost(marketData, 'analiz', "KriptoPusula'ya Hoşgeldiniz: Piyasa Genel Bakış");
+    const seedPost = await generateSinglePost(marketData, 'analiz', "KriptoSavasi'ya Hoşgeldiniz: Piyasa Genel Bakış");
     if (seedPost) {
         seedPost.date = getTodayDateString();
         posts.push(seedPost);

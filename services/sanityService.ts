@@ -1,5 +1,7 @@
 // Sanity CMS Service for blog posts
-// This service allows manual blog post management alongside AI-generated content
+// This service connects to Sanity CMS for manual blog post management
+
+import { createClient } from '@sanity/client';
 
 // Types for Sanity blog posts
 export interface SanityBlogPost {
@@ -25,43 +27,51 @@ export interface SanityBlogPost {
   }>;
 }
 
-// Mock data for demonstration purposes
-// In a real implementation, this would connect to Sanity CMS
+// Initialize Sanity client
+const client = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'your-project-id',
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+  apiVersion: '2023-05-03', // Use current date (YYYY-MM-DD)
+  useCdn: process.env.NODE_ENV === 'production', // `false` if you want to ensure fresh data
+});
+
+// Fetch blog posts from Sanity CMS
 export const fetchSanityBlogPosts = async (): Promise<SanityBlogPost[]> => {
-  // This is placeholder data - in reality, you would connect to Sanity CMS
-  return [
-    {
-      _id: "manual-post-1",
-      _createdAt: new Date().toISOString(),
-      title: "Manuel Blog Yazısı Örneği",
-      slug: {
-        current: "manuel-blog-yazisi-ornek"
-      },
-      excerpt: "Bu bir manuel olarak eklenen blog yazısıdır.",
-      body: "Bu içerik manuel olarak CMS üzerinden eklenmiştir. AI tarafından değil, kullanıcı tarafından oluşturulmuştur.",
-      mainImage: {
-        asset: {
-          url: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=1000&auto=format&fit=crop"
+  try {
+    const query = `*[_type == "post"] | order(publishedAt desc) {
+      _id,
+      _createdAt,
+      title,
+      slug,
+      excerpt,
+      body,
+      mainImage{
+        asset->{
+          url
         }
       },
-      publishedAt: new Date().toISOString(),
-      author: {
-        name: "Yönetici"
+      publishedAt,
+      author->{
+        name
       },
-      categories: [
-        {
-          title: "haber"
-        }
-      ]
-    }
-  ];
+      categories[]->{
+        title
+      }
+    }`;
+    
+    const posts = await client.fetch(query);
+    return posts;
+  } catch (error) {
+    console.error("Sanity CMS veri çekme hatası:", error);
+    return [];
+  }
 };
 
 // Function to combine Sanity posts with AI-generated posts
 export const mergeBlogPosts = (aiPosts: any[], sanityPosts: SanityBlogPost[]) => {
   // Convert Sanity posts to match BlogPost interface
   const convertedSanityPosts = sanityPosts.map(post => ({
-    id: post._id,
+    id: `sanity-${post._id}`,
     title: post.title,
     slug: post.slug.current,
     metaDescription: post.excerpt,
@@ -71,7 +81,7 @@ export const mergeBlogPosts = (aiPosts: any[], sanityPosts: SanityBlogPost[]) =>
     author: post.author.name,
     date: post.publishedAt.split('T')[0],
     readTime: "5 dk",
-    imageUrl: post.mainImage?.asset.url || "https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=1000&auto=format&fit=crop",
+    imageUrl: post.mainImage?.asset?.url || "https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=1000&auto=format&fit=crop",
     tags: post.categories.map(cat => cat.title),
     keywords: [post.title.split(' ')[0]],
     category: post.categories[0]?.title || "haber"

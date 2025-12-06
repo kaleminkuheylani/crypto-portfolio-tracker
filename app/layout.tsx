@@ -9,16 +9,16 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://kriptopusula.com'),
+  metadataBase: new URL('https://kriptosavasi.com'),
   title: {
-    default: 'KriptoPusula | Yapay Zeka Destekli Kripto Takibi',
-    template: '%s | KriptoPusula'
+    default: 'KriptoSavası | Yapay Zeka Destekli Kripto Takibi',
+    template: '%s | KriptoSavası'
   },
   description: 'Yapay zeka destekli piyasa analizleri, canlı fiyat takibi ve akıllı portföy yönetimi. Kripto yatırımlarınızı Gemini AI ile güçlendirin.',
   keywords: ['kripto', 'bitcoin', 'ethereum', 'analiz', 'yapay zeka', 'portföy takibi', 'gemini ai', 'borsa', 'kripto para', 'yatırım', 'fiyat takibi'],
-  authors: [{ name: 'KriptoPusula' }],
-  creator: 'KriptoPusula',
-  publisher: 'KriptoPusula',
+  authors: [{ name: 'KriptoSavası' }],
+  creator: 'KriptoSavası',
+  publisher: 'KriptoSavası',
   robots: {
     index: true,
     follow: true,
@@ -33,25 +33,25 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'tr_TR',
-    url: 'https://kriptopusula.com',
-    siteName: 'KriptoPusula',
-    title: 'KriptoPusula | Yapay Zeka Destekli Kripto Takibi',
+    url: 'https://kriptosavasi.com',
+    siteName: 'KriptoSavası',
+    title: 'KriptoSavası | Yapay Zeka Destekli Kripto Takibi',
     description: 'Yapay zeka destekli piyasa analizleri, canlı fiyat takibi ve akıllı portföy yönetimi.',
     images: [
       {
         url: '/logo.png',
         width: 512,
         height: 512,
-        alt: 'KriptoPusula Logo',
+        alt: 'KriptoSavası Logo',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'KriptoPusula | Yapay Zeka Destekli Kripto Takibi',
+    title: 'KriptoSavası | Yapay Zeka Destekli Kripto Takibi',
     description: 'Yapay zeka destekli piyasa analizleri, canlı fiyat takibi ve akıllı portföy yönetimi.',
     images: ['/logo.png'],
-    creator: '@kriptopusula',
+    creator: '@kriptosavasi',
   },
   icons: {
     icon: '/logo.png',
@@ -68,7 +68,7 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <head>
-        <link rel="canonical" href="https://kriptopusula.com" />
+        <link rel="canonical" href="https://kriptosavasi.com" />
         <meta name="google-site-verification" content="lzwuDrHLjD2upb3dKLjyam-lmu9uQRnTzHnNHx7tBBE" />
       </head>
       <body>{children}</body>

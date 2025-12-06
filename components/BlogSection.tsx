@@ -46,7 +46,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ marketData }) => {
     <div className="animate-fade-in">
       <div className="mb-8 flex justify-between items-end">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">KriptoPusula Blog</h1>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">KriptoSavasi Blog</h1>
           <p className="text-gray-500">
             Pazartesi-Cuma: <span className="text-yellow-600">Tahminler</span> • 
             Cumartesi: <span className="text-purple-600">Analiz</span> • 

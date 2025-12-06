@@ -25,7 +25,7 @@ const AboutSection: React.FC = () => {
                         <div>
                             <h3 className="text-xl font-bold text-gray-900 mb-2">Kar Amaci Gutmuyoruz</h3>
                             <p className="text-gray-600 leading-relaxed">
-                                KriptoPusula, topluluk tarafindan topluluk icin olusturulmus bir egitim platformudur. 
+                                KriptoSavasi, topluluk tarafindan topluluk icin olusturulmus bir egitim platformudur.
                                 Hicbir ucretli uyelik, reklam geliri veya ticari amacimiz bulunmamaktadir. 
                                 Tek amacimiz kripto para dunyasini herkes icin daha anlasilir ve eriselebilir kilmaktir.
                             </p>
@@ -41,7 +41,7 @@ const AboutSection: React.FC = () => {
                         Misyonumuz
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
-                        Kripto para piyasasi karmasik ve gozda korkutucu gorunebilir. KriptoPusula olarak, bu karmasikligi 
+                        Kripto para piyasasi karmasik ve gozda korkutucu gorunebilir. KriptoSavasi olarak, bu karmasikligi
                         ortadan kaldirmak ve herkesin bilgiye esit erisimini saglamak icin calismaktayiz. Yapay zeka 
                         destekli analiz araclarimiz, piyasa verilerimiz ve egitim iceriklerimiz tamamen ucretsizdir.
                     </p>
@@ -154,7 +154,7 @@ const AboutSection: React.FC = () => {
                         <div>
                             <h3 className="text-xl font-bold text-gray-900 mb-2">Onemli Uyari</h3>
                             <p className="text-gray-600 leading-relaxed">
-                                KriptoPusula tarafindan saglanan bilgiler sadece egitim amacldir ve yatirim tavsiyesi niteliginde degildir. 
+                                KriptoSavasi tarafindan saglanan bilgiler sadece egitim amacldir ve yatirim tavsiyesi niteliginde degildir.
                                 Kripto para piyasalari yuksek risk icerir. Yatirim kararlari almadan once kendi arastirmanizi yapin 
                                 ve gerekirse profesyonel finansal danismanlik alin.
                             </p>
@@ -164,7 +164,7 @@ const AboutSection: React.FC = () => {
                 
                 <section className="border-t border-gray-200 pt-8 text-center">
                     <p className="text-sm text-gray-500">
-                        KriptoPusula &copy; {new Date().getFullYear()}. Kar amaci gutmeyen topluluk projesi.
+                        KriptoSavasi &copy; {new Date().getFullYear()}. Kar amaci gutmeyen topluluk projesi.
                     </p>
                     <p className="text-xs text-gray-400 mt-2">
                         Veriler CoinPaprika ve Binance tarafindan saglanmaktadir.

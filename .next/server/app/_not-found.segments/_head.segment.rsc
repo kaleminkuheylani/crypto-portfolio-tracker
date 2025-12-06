@@ -1,7 +1,0 @@
-1:"$Sreact.fragment"
-2:I[97367,["/_next/static/chunks/501f4f1c6c42cd35.js"],"ViewportBoundary"]
-4:I[97367,["/_next/static/chunks/501f4f1c6c42cd35.js"],"MetadataBoundary"]
-5:"$Sreact.suspense"
-0:{"buildId":"GJUN6MIvc_HmsXfbtIfAS","rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L2",null,{"children":"$@3"}],["$","div",null,{"hidden":true,"children":["$","$L4",null,{"children":["$","$5",null,{"name":"Next.Metadata","children":"$@6"}]}]}],null]}],"loading":null,"isPartial":false}
-3:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
-6:[["$","title","0",{"children":"KriptoPusula | Yapay Zeka Destekli Kripto Takibi"}],["$","meta","1",{"name":"description","content":"Yapay zeka destekli piyasa analizleri, anlık fiyat takibi ve akıllı portföy yönetimi. Kripto yatırımlarınızı Gemini AI ile güçlendirin."}],["$","meta","2",{"name":"keywords","content":"kripto, bitcoin, analiz, yapay zeka, portföy takibi, gemini ai, borsa"}],["$","meta","3",{"name":"robots","content":"index, follow"}]]

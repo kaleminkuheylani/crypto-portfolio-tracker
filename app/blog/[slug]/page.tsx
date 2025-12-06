@@ -18,20 +18,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       
       if (blogPost) {
         return {
-          title: `${blogPost.title} | KriptoPusula Blog`,
-          description: blogPost.metaDescription || blogPost.summary || `KriptoPusula - ${blogPost.title} hakkında detaylı kripto analizi ve piyasa değerlendirmesi.`,
+          title: `${blogPost.title} | KriptoSavası Blog`,
+          description: blogPost.metaDescription || blogPost.summary || `KriptoSavası - ${blogPost.title} hakkında detaylı kripto analizi ve piyasa değerlendirmesi.`,
           keywords: blogPost.keywords || ['kripto', 'bitcoin', 'ethereum', 'analiz', 'tahmin', 'piyasa', 'blog'],
           openGraph: {
-            title: `${blogPost.title} | KriptoPusula Blog`,
+            title: `${blogPost.title} | KriptoSavası Blog`,
             description: blogPost.metaDescription || blogPost.summary,
             type: 'article',
-            siteName: 'KriptoPusula',
-            url: `https://kriptopusula.com/blog/${decodedSlug}`,
+            siteName: 'KriptoSavası',
+            url: `https://kriptosavasi.com/blog/${decodedSlug}`,
             ...(blogPost.imageUrl && { images: [blogPost.imageUrl] }),
           },
           twitter: {
             card: 'summary_large_image',
-            title: `${blogPost.title} | KriptoPusula Blog`,
+            title: `${blogPost.title} | KriptoSavasi Blog`,
             description: blogPost.metaDescription || blogPost.summary,
             ...(blogPost.imageUrl && { images: [blogPost.imageUrl] }),
           },
@@ -48,19 +48,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   
   // Fallback metadata
   return {
-    title: `${decodedSlug.replace(/-/g, ' ')} | KriptoPusula Blog`,
-    description: `KriptoPusula - ${decodedSlug.replace(/-/g, ' ')} hakkında detaylı kripto analizi ve piyasa değerlendirmesi.`,
+    title: `${decodedSlug.replace(/-/g, ' ')} | KriptoSavası Blog`,
+    description: `KriptoSavası - ${decodedSlug.replace(/-/g, ' ')} hakkında detaylı kripto analizi ve piyasa değerlendirmesi.`,
     keywords: ['kripto', 'bitcoin', 'ethereum', 'analiz', 'tahmin', 'piyasa', 'blog'],
     openGraph: {
-      title: `${decodedSlug.replace(/-/g, ' ')} | KriptoPusula Blog`,
-      description: `KriptoPusula - ${decodedSlug.replace(/-/g, ' ')} hakkında detaylı kripto analizi.`,
+      title: `${decodedSlug.replace(/-/g, ' ')} | KriptoSavası Blog`,
+      description: `KriptoSavası - ${decodedSlug.replace(/-/g, ' ')} hakkında detaylı kripto analizi.`,
       type: 'article',
-      siteName: 'KriptoPusula',
-      url: `https://kriptopusula.com/blog/${decodedSlug}`,
+      siteName: 'KriptoSavası',
+      url: `https://kriptosavasi.com/blog/${decodedSlug}`,
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${decodedSlug.replace(/-/g, ' ')} | KriptoPusula Blog`,
+      title: `${decodedSlug.replace(/-/g, ' ')} | KriptoSavasi Blog`,
     },
     robots: {
       index: true,

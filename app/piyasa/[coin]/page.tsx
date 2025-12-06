@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!coinData) {
     return {
-      title: `${coin} - Kripto Para Detayı | KriptoPusula`,
+      title: `${coin} - Kripto Para Detayı | KriptoSavasi`,
       description: `${coin} hakkında canlı fiyat, piyasa değeri, işlem hacmi ve detaylı istatistikler.`,
       keywords: [coin, 'kripto para', 'canlı fiyat', 'piyasa değeri', 'kripto analiz'],
     };
@@ -33,19 +33,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const marketCap = (coinData.market_cap / 1000000).toFixed(2);
 
   return {
-    title: `${coinName} (${coinSymbol}) Fiyatı ve Analizi | KriptoPusula`,
+    title: `${coinName} (${coinSymbol}) Fiyatı ve Analizi | KriptoSavasi`,
     description: `${coinName} (${coinSymbol}) fiyatı: ${price}. Piyasa değeri: $${marketCap}M. Canlı kripto para verileri, grafikler ve teknik analiz.`,
     keywords: [coinSymbol, coinName, 'kripto fiyat', 'canlı fiyat', 'piyasa değeri', 'kripto para', 'BTC', 'ETH', 'SOL'],
     openGraph: {
-      title: `${coinName} (${coinSymbol}) Fiyatı | KriptoPusula`,
+      title: `${coinName} (${coinSymbol}) Fiyatı | KriptoSavasi`,
       description: `${coinName} (${coinSymbol}) fiyatı: ${price}. Piyasa değeri: $${marketCap}M. Canlı kripto verileri ve teknik analiz.`,
       type: 'website',
-      siteName: 'KriptoPusula',
-      url: `https://kriptopusula.com/piyasa/${coin}`,
+      siteName: 'KriptoSavasi',
+      url: `https://kriptosavasi.com/piyasa/${coin}`,
     },
     twitter: {
       card: 'summary',
-      title: `${coinName} (${coinSymbol}) Fiyatı | KriptoPusula`,
+      title: `${coinName} (${coinSymbol}) Fiyatı | KriptoSavasi`,
       description: `${coinName} (${coinSymbol}) fiyatı: ${price}. Piyasa değeri: $${marketCap}M.`,
     },
     robots: {

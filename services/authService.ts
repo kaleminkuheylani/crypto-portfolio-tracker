@@ -2,9 +2,9 @@
 import { User } from '../types';
 
 // Veritabanı Tablo İsimleri (LocalStorage Keys)
-const DB_TABLE_GOOGLE = 'kriptopusula_db_google_users';
-const DB_TABLE_EMAIL = 'kriptopusula_db_email_users';
-const SESSION_KEY = 'kriptopusula_session_user';
+const DB_TABLE_GOOGLE = 'kriptosavasi_db_google_users';
+const DB_TABLE_EMAIL = 'kriptosavasi_db_email_users';
+const SESSION_KEY = 'kriptosavasi_session_user';
 
 // Yardımcı: Tabloyu oku
 const getTable = (tableName: string): User[] => {

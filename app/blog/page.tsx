@@ -40,7 +40,7 @@ export default function BlogPage() {
     if (!isMounted) return;
 
     if (selectedPost) {
-      document.title = `${selectedPost.title} | KriptoPusula Blog`;
+      document.title = `${selectedPost.title} | KriptoSavasi Blog`;
       let metaDesc = document.querySelector("meta[name='description']");
       if (!metaDesc) {
         metaDesc = document.createElement('meta');
@@ -49,7 +49,7 @@ export default function BlogPage() {
       }
       metaDesc.setAttribute('content', selectedPost.metaDescription);
     } else {
-      document.title = "Blog & Haberler | KriptoPusula";
+      document.title = "Blog & Haberler | KriptoSavasi";
       let metaDesc = document.querySelector("meta[name='description']");
       if (metaDesc) {
         metaDesc.setAttribute('content', 'Yapay zeka tarafından hazırlanan günlük kripto tahminleri, teknik analizler ve piyasa haberleri.');
@@ -63,7 +63,7 @@ export default function BlogPage() {
     
     // Save to localStorage
     if (typeof window !== 'undefined') {
-      localStorage.setItem('kriptopusula_blog_db', JSON.stringify(updatedPosts));
+      localStorage.setItem('kriptosavasi_blog_db', JSON.stringify(updatedPosts));
     }
   };
 
@@ -117,8 +117,8 @@ export default function BlogPage() {
       <header className="bg-gray-800 border-b border-gray-700 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 font-bold text-xl text-blue-500 hover:text-blue-400 transition-colors">
-            <img src="/logo.png" alt="KriptoPusula Logo" className="w-10 h-10 object-contain" />
-            KriptoPusula
+            <img src="/logo.png" alt="KriptoSavasi Logo" className="w-10 h-10 object-contain" />
+            KriptoSavasi
           </Link>
           <nav className="flex items-center gap-4">
             <Link href="/" className="text-gray-400 hover:text-white transition-colors text-sm">
@@ -220,11 +220,11 @@ export default function BlogPage() {
 
       <footer className="bg-gray-800 border-t border-gray-700 mt-12">
         <div className="max-w-7xl mx-auto px-4 py-8 text-center text-gray-400 text-sm">
-          <p>KriptoPusula - Yapay Zeka Destekli Kripto Takibi</p>
+          <p>KriptoSavasi - Yapay Zeka Destekli Kripto Takibi</p>
           <p className="mt-2 text-xs">Bu içerikler yapay zeka tarafından oluşturulmuştur ve yatırım tavsiyesi niteliği taşımaz.</p>
           <p className="mt-4">
             <a 
-              href="https://buyacoffe.me/KriptoSavsi" 
+              href="https://buymeacoffe.com/kriptosavasi" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-blue-400 hover:text-blue-300 font-medium"

@@ -28,7 +28,7 @@ const BlogSchema = new Schema<IBlog>(
     summary: { type: String, required: true },
     htmlContent: { type: String, required: true },
     content: { type: String, required: true },
-    author: { type: String, default: 'KriptoPusula AI' },
+    author: { type: String, default: 'KriptoSavasi AI' },
     date: { type: String, required: true },
     readTime: { type: String, required: true },
     imageUrl: { type: String, required: true },

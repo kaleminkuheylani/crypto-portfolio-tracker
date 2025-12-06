@@ -17,7 +17,7 @@ const PremiumSection: React.FC<PremiumSectionProps> = ({ onSubscribe, isPremium 
           Yatırımlarınızı <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-600">Profesyonel</span> Araçlarla Yönetin
         </h2>
         <p className="text-xl text-gray-400 max-w-2xl mx-auto relative z-10">
-          KriptoPusula Premium ile yapay zeka destekli analizlere, sınırsız alarmlara ve gelişmiş portföy araçlarına erişin.
+          KriptoSavasi Premium ile yapay zeka destekli analizlere, sınırsız alarmlara ve gelişmiş portföy araçlarına erişin.
         </p>
       </div>
 

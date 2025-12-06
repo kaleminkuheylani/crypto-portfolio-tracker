@@ -1,9 +1,0 @@
-{
-  "/_global-error/page": "/_global-error",
-  "/_not-found/page": "/_not-found",
-  "/api/blog/generate/route": "/api/blog/generate",
-  "/api/crypto/route": "/api/crypto",
-  "/api/gemini/analyze/route": "/api/gemini/analyze",
-  "/api/gemini/chat/route": "/api/gemini/chat",
-  "/page": "/"
-}

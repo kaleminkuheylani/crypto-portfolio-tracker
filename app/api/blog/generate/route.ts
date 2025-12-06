@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
            "summary": "String (Kısa özet)",
            "htmlContent": "String (HTML etiketli içerik)",
            "content": "String (Düz metin)",
-           "author": "KriptoPusula AI",
+           "author": "KriptoSavasi AI",
            "readTime": "String (örn: 5 dk)",
            "tags": ["String", "String"],
            "keywords": ["String", "String"]

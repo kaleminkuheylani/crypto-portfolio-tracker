@@ -37,10 +37,22 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLoginSuccess }
       }
   };
 
+  const validateEmail = (email: string): boolean => {
+    const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return re.test(email);
+  };
+
   const handleEmailSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
       setIsLoading(true);
       setError('');
+
+      // Validate email format
+      if (email && !validateEmail(email)) {
+          setError("Gecerli bir e-posta adresi girin.");
+          setIsLoading(false);
+          return;
+      }
 
       try {
           if (activeTab === 'register') {
@@ -68,7 +80,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLoginSuccess }
 
         <div className="p-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-                {activeTab === 'login' ? 'KriptoPusula\'ya Giris Yap' : 'Hesap Olustur'}
+                {activeTab === 'login' ? 'KriptoSavasi\'ya Giris Yap' : 'Hesap Olustur'}
             </h2>
 
             <button 

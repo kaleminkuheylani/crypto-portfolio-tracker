@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Hakkimizda | KriptoPusula',
-  description: 'KriptoPusula, yapay zeka destekli kripto para takip ve analiz platformudur. Misyonumuz ve vizyonumuz hakkinda bilgi edinin.',
+  title: 'Hakkimizda | KriptoSavasi',
+  description: 'KriptoSavasi, yapay zeka destekli kripto para takip ve analiz platformudur. Misyonumuz ve vizyonumuz hakkinda bilgi edinin.',
   keywords: ['kripto pusula', 'hakkimizda', 'kripto analiz', 'yapay zeka', 'kripto takip'],
   openGraph: {
-    title: 'Hakkimizda | KriptoPusula',
-    description: 'KriptoPusula, yapay zeka destekli kripto para takip ve analiz platformudur.',
+    title: 'Hakkimizda | KriptoSavasi',
+    description: 'KriptoSavasi, yapay zeka destekli kripto para takip ve analiz platformudur.',
     type: 'website',
-    siteName: 'KriptoPusula',
+    siteName: 'KriptoSavasi',
   },
   robots: 'index, follow',
 };
@@ -20,8 +20,8 @@ export default function HakkimizdaPage() {
       <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 font-bold text-xl text-blue-600 hover:text-blue-500 transition-colors">
-            <img src="/logo.png" alt="KriptoPusula Logo" className="w-10 h-10 object-contain" />
-            KriptoPusula
+            <img src="/logo.png" alt="KriptoSavasi Logo" className="w-10 h-10 object-contain" />
+            KriptoSavasi
           </Link>
           <nav className="flex items-center gap-4">
             <Link href="/" className="text-gray-500 hover:text-gray-900 transition-colors text-sm">
@@ -37,8 +37,8 @@ export default function HakkimizdaPage() {
 
       <main className="max-w-4xl mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <img src="/logo.png" alt="KriptoPusula Logo" className="w-24 h-24 mx-auto mb-6" />
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">KriptoPusula</h1>
+          <img src="/logo.png" alt="KriptoSavasi Logo" className="w-24 h-24 mx-auto mb-6" />
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">KriptoSavasi</h1>
           <p className="text-xl text-gray-600">
             Yapay Zeka Destekli Kripto Takip ve Analiz Platformu
           </p>
@@ -55,7 +55,7 @@ export default function HakkimizdaPage() {
               Misyonumuz
             </h2>
             <p className="text-gray-600 leading-relaxed">
-              KriptoPusula olarak misyonumuz, kripto para piyasasini herkes icin erisilebilir ve 
+              KriptoSavasi olarak misyonumuz, kripto para piyasasini herkes icin erisilebilir ve
               anlasilir kilmaktir. Yapay zeka destekli analizlerimiz ve kullanici dostu arayuzumuz 
               ile hem yeni baslayanlara hem de deneyimli yatirimcilara deger katmayi hedefliyoruz.
             </p>
@@ -126,7 +126,7 @@ export default function HakkimizdaPage() {
             </h2>
             <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
               <p className="text-gray-700 text-sm leading-relaxed">
-                KriptoPusula'da paylasilan tum icerikler yalnizca bilgilendirme amaçlidir ve 
+                KriptoSavasi'da paylasilan tum icerikler yalnizca bilgilendirme amaçlidir ve
                 yatirim tavsiyesi niteligi tasimaz. Kripto para piyasasi yuksek volatiliteye 
                 sahiptir ve ciddi finansal kayiplara yol acabilir. Yatirim kararlari almadan 
                 once kendi arastirmanizi yapin ve gerekirse profesyonel finansal danismanlik alin.
@@ -152,18 +152,8 @@ export default function HakkimizdaPage() {
 
       <footer className="bg-gray-50 border-t border-gray-200 mt-12">
         <div className="max-w-7xl mx-auto px-4 py-8 text-center text-gray-500 text-sm">
-          <p>KriptoPusula - Kar amaci gutmeyen, topluluk odakli kripto egitim platformu</p>
-          <p className="mt-2">
-            <a 
-              href="https://buyacoffe.me/KriptoSavsi" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:text-blue-800 font-medium"
-            >
-              ☕ Projeyi desteklemek icin bir kahve satin al
-            </a>
-          </p>
-          <p className="mt-2">&copy; {new Date().getFullYear()} KriptoPusula. Tum haklari saklidir.</p>
+          <p>KriptoSavasi - Kar amaci gutmeyen, topluluk odakli kripto egitim platformu</p>
+          <p className="mt-2">&copy; {new Date().getFullYear()} KriptoSavasi. Tum haklari saklidir.</p>
         </div>
       </footer>
     </div>

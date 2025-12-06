@@ -1,7 +1,7 @@
-# KriptoPusula - Crypto Portfolio Tracker
+# KriptoSavasi - Crypto Portfolio Tracker
 
 ## Overview
-KriptoPusula is a cryptocurrency portfolio tracking application built with Next.js. It provides real-time market data, portfolio management, AI-powered investment insights, technical charts, price alerts, and an AI-generated blog section. The application operates as a non-profit initiative focused on crypto education.
+KriptoSavasi is a cryptocurrency portfolio tracking application built with Next.js. It provides real-time market data, portfolio management, AI-powered investment insights, technical charts, price alerts, and an AI-generated blog section. The application operates as a non-profit initiative focused on crypto education.
 
 ## Recent Changes
 - **2025-12-05**: Enhanced Binance service with multiple proxy fallbacks and mock data generation for regional blocking
@@ -31,7 +31,7 @@ KriptoPusula is a cryptocurrency portfolio tracking application built with Next.
 
 ### Project Structure
 ```
-kriptopusula/
+kriptosavasi/
 ├── app/                    # Next.js App Router pages
 │   ├── layout.tsx         # Root layout with SEO metadata
 │   ├── page.tsx           # Main app entry (client component)

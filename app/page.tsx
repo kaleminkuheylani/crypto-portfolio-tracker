@@ -1,18 +1,14 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { AuthService } from '../services/authService';
 import { getTopCoins, searchCoins, getFearAndGreedIndex, getMarketSentiment } from '../services/cryptoApi';
 import { CoinData, PortfolioItem, PriceAlert, User, FearGreedData, MarketSentiment } from '../types';
-import MarketTable from '../components/MarketTable';
-import PortfolioSection from '../components/PortfolioSection';
-import GeminiAdvisor from '../components/GeminiAdvisor';
-import BlogSection from '../components/BlogSection';
-import TradingChart from '../components/TradingChart';
-import AlertsSection from '../components/AlertsSection';
 import AuthModal from '../components/AuthModal';
-import AboutSection from '../components/AboutSection';
-import MarketSentimentPanel from '../components/MarketSentimentPanel';
-import { AuthService } from '../services/authService';
+import Header from '../components/Header';
+import MainContent from '../components/MainContent';
+import Notifications from '../components/Notifications';
+import Footer from '../components/Footer';
 
 export default function Home() {
   const [coins, setCoins] = useState<CoinData[]>([]);
@@ -47,28 +43,28 @@ export default function Home() {
   useEffect(() => {
     if (!isMounted) return;
     
-    let title = "KriptoPusula | Akilli Kripto Takibi";
-    let desc = "KriptoPusula ile portfoyunuzu yonetin, yapay zeka destekli analizler alin ve piyasayi canli takip edin.";
+    let desc = "KriptoSavasi ile portfoyunuzu yonetin, yapay zeka destekli analizler alin ve piyasayi canli takip edin.";
+    let title = "KriptoSavasi | Akilli Kripto Takibi";
 
     switch(activeTab) {
       case 'dashboard':
-        title = "Portfoy Paneli | KriptoPusula";
+        title = "Portfoy Paneli | KriptoSavasi";
         desc = "Kripto varliklarinizi tek bir yerden yonetin ve kar/zarar durumunuzu anlik gorun.";
         break;
       case 'market':
-        title = "Canli Piyasa | KriptoPusula";
+        title = "Canli Piyasa | KriptoSavasi";
         desc = "En populer kripto paralarin canli fiyatlari, degisim oranlari ve piyasa verileri.";
         break;
       case 'chart':
-        title = "Pro Teknik Analiz | KriptoPusula";
+        title = "Pro Teknik Analiz | KriptoSavasi";
         desc = "TradingView altyapisi ve Binance verileriyle profesyonel teknik analiz grafikleri.";
         break;
       case 'blog':
-        title = "Blog & Haberler | KriptoPusula";
+        title = "Blog & Haberler | KriptoSavasi";
         desc = "Yapay zeka tarafindan hazirlanan gunluk kripto tahminleri, teknik analizler ve piyasa haberleri.";
         break;
       case 'alerts':
-        title = "Fiyat Alarmlari | KriptoPusula";
+        title = "Fiyat Alarmlari | KriptoSavasi";
         break;
     }
 
@@ -257,6 +253,10 @@ export default function Home() {
     setAlerts(prev => prev.filter(a => a.id !== id));
   };
 
+  const handleRemoveNotification = (id: string) => {
+    setNotifications(prev => prev.filter(n => n.id !== id));
+  };
+
   if (!isMounted) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
@@ -274,161 +274,40 @@ export default function Home() {
         onLoginSuccess={handleLoginSuccess}
       />
 
-      <div className="fixed top-4 right-4 z-[110] flex flex-col gap-2 pointer-events-none">
-        {notifications.map(n => (
-          <div key={n.id} className={`pointer-events-auto p-4 rounded-lg shadow-2xl text-white font-medium flex items-center gap-3 animate-fade-in-right w-80 ${n.type === 'success' ? 'bg-green-600' : 'bg-blue-600'}`}>
-             <span className="text-2xl">{n.type === 'success' ? '🚀' : '📩'}</span>
-             <div>
-               <div className="text-xs opacity-75">{n.type === 'success' ? 'Basarili' : 'Bildirim'}</div>
-               {n.message}
-             </div>
-          </div>
-        ))}
-      </div>
+      <Notifications 
+        notifications={notifications} 
+        onRemove={handleRemoveNotification} 
+      />
 
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-2 font-bold text-xl text-blue-600">
-               <img src="/logo.png" alt="KriptoPusula Logo" className="w-10 h-10 object-contain" />
-               KriptoPusula
-            </div>
+      <Header 
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        user={user}
+        isLoading={isLoading}
+        isSearching={isSearching}
+        onLoginClick={() => setIsAuthModalOpen(true)}
+        onLogout={handleLogout}
+      />
 
-            <nav className="hidden md:flex items-center gap-1">
-              <button onClick={() => setActiveTab('dashboard')} className={`px-4 py-2 rounded-lg font-medium transition-all ${activeTab === 'dashboard' ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-100'}`}>
-                Panel
-              </button>
-              <button onClick={() => setActiveTab('market')} className={`px-4 py-2 rounded-lg font-medium transition-all ${activeTab === 'market' ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-100'}`}>
-                Canli Piyasa
-              </button>
-              <button onClick={() => setActiveTab('chart')} className={`px-4 py-2 rounded-lg font-medium transition-all ${activeTab === 'chart' ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-100'}`}>
-                Pro Grafik
-              </button>
-              <button onClick={() => setActiveTab('alerts')} className={`px-4 py-2 rounded-lg font-medium transition-all ${activeTab === 'alerts' ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-100'}`}>
-                Alarmlar
-              </button>
-              <button onClick={() => setActiveTab('blog')} className={`px-4 py-2 rounded-lg font-medium transition-all ${activeTab === 'blog' ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-100'}`}>
-                Blog
-              </button>
-              <button onClick={() => setActiveTab('about')} className={`px-4 py-2 rounded-lg font-medium transition-all ${activeTab === 'about' ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-100'}`}>
-                Hakkimizda
-              </button>
-            </nav>
+      <MainContent
+        activeTab={activeTab}
+        coins={coins}
+        portfolio={portfolio}
+        alerts={alerts}
+        isLoading={isLoading}
+        isSearching={isSearching}
+        user={user}
+        fearGreedData={fearGreedData}
+        marketSentiment={marketSentiment}
+        selectedChartCoin={selectedChartCoin}
+        onAddAsset={handleAddAsset}
+        onViewChart={handleViewChart}
+        onRemoveAsset={handleRemoveAsset}
+        onAddAlert={handleAddAlert}
+        onRemoveAlert={handleRemoveAlert}
+      />
 
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200">
-                <span className={`w-2 h-2 rounded-full ${isLoading ? 'bg-yellow-500 animate-pulse' : 'bg-green-500 animate-pulse'}`}></span>
-                <span className="text-xs font-medium text-gray-600">{isLoading || isSearching ? 'Guncelleniyor...' : 'Canli'}</span>
-              </div>
-              
-              {user ? (
-                <div className="flex items-center gap-3">
-                    <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full bg-gray-200" />
-                    <span className="text-sm font-medium text-gray-700 hidden sm:block">{user.name}</span>
-                    <button onClick={handleLogout} className="text-gray-500 hover:text-red-500" title="Cikis Yap">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                    </button>
-                </div>
-              ) : (
-                <button 
-                    onClick={() => setIsAuthModalOpen(true)}
-                    className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
-                >
-                    Giris Yap
-                </button>
-              )}
-            </div>
-          </div>
-
-          <div className="md:hidden pb-3 flex gap-2 overflow-x-auto">
-            <button onClick={() => setActiveTab('dashboard')} className={`px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap ${activeTab === 'dashboard' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600'}`}>Panel</button>
-            <button onClick={() => setActiveTab('market')} className={`px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap ${activeTab === 'market' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600'}`}>Piyasa</button>
-            <button onClick={() => setActiveTab('chart')} className={`px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap ${activeTab === 'chart' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600'}`}>Grafik</button>
-            <button onClick={() => setActiveTab('alerts')} className={`px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap ${activeTab === 'alerts' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600'}`}>Alarmlar</button>
-            <button onClick={() => setActiveTab('blog')} className={`px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap ${activeTab === 'blog' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600'}`}>Blog</button>
-            <button onClick={() => setActiveTab('about')} className={`px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap ${activeTab === 'about' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600'}`}>Hakkimizda</button>
-          </div>
-        </div>
-      </header>
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
-            {activeTab === 'dashboard' ? 'Portfoy Paneli' : 
-             activeTab === 'market' ? 'Piyasa Genel Bakis' : 
-             activeTab === 'chart' ? 'Pro Teknik Analiz' : 
-             activeTab === 'alerts' ? 'Fiyat Alarmlari' : 
-             activeTab === 'about' ? 'Hakkimizda' :
-             'Kripto Gundemi'}
-          </h1>
-          <p className="text-gray-500 mt-1">
-            {activeTab === 'dashboard' ? 'Varliklarinizi takip edin ve piyasa durumunu gorun.' : 
-             activeTab === 'market' ? 'Anlik piyasa verileri ve detayli istatistikler.' : 
-             activeTab === 'chart' ? 'Binance canli veri akisi ile detayli mum grafigi.' :
-             activeTab === 'alerts' ? 'Kritik fiyat seviyeleri icin kisisel alarmlarinizi yonetin.' :
-             activeTab === 'about' ? 'Misyonumuz ve vizyonumuz hakkinda bilgi edinin.' :
-             'Piyasa verilerine gore yapay zeka tarafindan derlenen guncel haberler.'}
-          </p>
-        </div>
-
-        {activeTab === 'dashboard' && (
-          <div className="space-y-6">
-            <MarketSentimentPanel sentiment={marketSentiment} fearGreedData={fearGreedData} />
-            <PortfolioSection 
-              portfolio={portfolio} 
-              marketData={coins} 
-              onRemove={handleRemoveAsset}
-              fearGreedData={fearGreedData}
-            />
-            <GeminiAdvisor portfolio={portfolio} marketData={coins} user={user} />
-          </div>
-        )}
-        
-        {activeTab === 'market' && (
-          <MarketTable 
-            data={coins} 
-            isLoading={isLoading} 
-            onAddAsset={handleAddAsset}
-            onViewChart={handleViewChart}
-            portfolio={portfolio}
-          />
-        )}
-        
-        {activeTab === 'chart' && selectedChartCoin && (
-          <TradingChart symbol={selectedChartCoin.symbol} coinName={selectedChartCoin.name} />
-        )}
-        {activeTab === 'chart' && !selectedChartCoin && (
-          <TradingChart symbol="btc" coinName="Bitcoin" />
-        )}
-
-        {activeTab === 'alerts' && (
-          <AlertsSection 
-            marketData={coins}
-            alerts={alerts}
-            onAddAlert={handleAddAlert}
-            onRemoveAlert={handleRemoveAlert}
-          />
-        )}
-
-        {activeTab === 'blog' && (
-          <BlogSection marketData={coins} />
-        )}
-
-        {activeTab === 'about' && (
-          <AboutSection />
-        )}
-      </main>
-
-      <footer className="bg-gray-50 border-t border-gray-200 mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center text-gray-500 text-sm">
-            <p>KriptoPusula - Kar amaci gutmeyen, topluluk odakli kripto egitim platformu</p>
-            <p className="mt-2">Veriler CoinPaprika ve Binance tarafindan saglanmaktadir. AI ongoruleri Google Gemini ile guclendirilmistir.</p>
-            <p className="mt-2"><a href="https://buyacoffe.me/KriptoSavsi" target="_blank" rel="noopener noreferrer">☕ Projeyi desteklemek icin bir kahve satin al</a></p>
-            <p className="mt-2">&copy; {new Date().getFullYear()} KriptoPusula. Tum haklari saklidir.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

@@ -26,7 +26,7 @@ const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, onClose }) => {
             <p><strong>Son Güncelleme:</strong> {new Date().toLocaleDateString('tr-TR')}</p>
             
             <h3 className="text-lg font-bold text-white mt-4">1. Veri Sorumlusu</h3>
-            <p>KriptoPusula olarak, kişisel verilerinizin güvenliğine önem veriyoruz. Bu metin, verilerinizin nasıl işlendiğini açıklamaktadır.</p>
+            <p>KriptoSavasi olarak, kişisel verilerinizin güvenliğine önem veriyoruz. Bu metin, verilerinizin nasıl işlendiğini açıklamaktadır.</p>
 
             <h3 className="text-lg font-bold text-white mt-4">2. Toplanan Veriler</h3>
             <p>Hizmetimizi kullanırken şu bilgileri toplayabiliriz: E-posta adresi, Ad Soyad, Ödeme Bilgileri (Ödeme işleyicisi tarafından şifrelenmiş olarak), Kullanım verileri.</p>
