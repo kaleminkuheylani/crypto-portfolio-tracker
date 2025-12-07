@@ -1,8 +1,8 @@
 # Admin Panel Features
 
 ## Access
-- **URL**: `http://localhost:3001/admin/123a-951-753`
-- **Password**: `kriptosavasi2024`
+- **URL**: `http://localhost:3001/admin/{ADMIN_SECRET}`
+- **Password**: Stored in `.env.local`
 - **Credentials**: Stored in `.env.local`
 
 ## Features
@@ -36,8 +36,8 @@
 ### 4. Environment Variables
 Configure in `.env.local`:
 ```
-NEXT_PUBLIC_ADMIN_SECRET=123a-951-753
-NEXT_PUBLIC_ADMIN_PASSWORD=kriptosavasi2024
+NEXT_PUBLIC_ADMIN_SECRET=your_secret
+NEXT_PUBLIC_ADMIN_PASSWORD=your_password
 GEMINI_API_KEY=your_api_key
 MONGODB_URI=your_mongodb_uri
 ```
