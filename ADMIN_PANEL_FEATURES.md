@@ -34,13 +34,19 @@
 - Real-time list updates
 
 ### 4. Environment Variables
-Configure in `.env.local`:
+Configure in `.env.local` (copy from `.env.example`):
 ```
 NEXT_PUBLIC_ADMIN_SECRET=your_secret
-NEXT_PUBLIC_ADMIN_PASSWORD=your_password
+ADMIN_PASSWORD=your_password
 GEMINI_API_KEY=your_api_key
 MONGODB_URI=your_mongodb_uri
 ```
+
+**Security Notes:**
+- `NEXT_PUBLIC_ADMIN_SECRET`: Exposed in URL (acceptable for obfuscation layer)
+- `ADMIN_PASSWORD`: Server-side only - DO NOT use `NEXT_PUBLIC_` prefix
+- Password validation happens via `/api/admin/auth` endpoint on server
+- Never commit `.env.local` to git (it's in `.gitignore`)
 
 ## API Endpoints
 
@@ -71,13 +77,25 @@ Body: {
 }
 ```
 
+## API: Admin Authentication
+```
+POST /api/admin/auth
+Body: {
+  "password": "your_password",
+  "secret": "your_secret"
+}
+Response: { "success": true }
+```
+
 ## Security
 
 ⚠️ **Important:**
-- Admin secret and password are stored in `.env.local`
-- Never commit `.env.local` to git
+- Admin credentials are stored in `.env.local`
+- Never commit `.env.local` to git (already in `.gitignore`)
 - Change credentials from defaults in production
 - Use environment variables for all secrets
+- Password validation happens server-side (not client-side)
+- Use `.env.example` as a template for setup
 
 ## Workflow
 

@@ -5,7 +5,6 @@ import { useParams, useRouter } from 'next/navigation';
 import { BlogPost } from '../../../types';
 
 const ADMIN_SECRET = process.env.NEXT_PUBLIC_ADMIN_SECRET || '';
-const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || '';
 
 export default function AdminPage() {
   const params = useParams();
@@ -38,13 +37,30 @@ export default function AdminPage() {
     }
   }, [isAuthenticated]);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === ADMIN_PASSWORD) {
-      setIsAuthenticated(true);
-      setError('');
-    } else {
-      setError('Yanlış şifre!');
+    setError('');
+    
+    try {
+      const response = await fetch('/api/admin/auth', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          password,
+          secret: params.secret,
+        }),
+      });
+
+      if (response.ok) {
+        setIsAuthenticated(true);
+      } else {
+        setError('Yanlış şifre!');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setError('Giriş sırasında bir hata oluştu');
     }
   };
 
