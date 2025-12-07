@@ -1,8 +1,20 @@
 import { CoinData, FearGreedData, MarketSentiment } from '../types';
 
+const getBaseUrl = (): string => {
+  if (typeof window !== 'undefined') {
+    // Client-side
+    return '';
+  }
+  // Server-side: use absolute URL
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || process.env.VERCEL_URL || process.env.NETLIFY_HOST || 'localhost:3000';
+  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+  return `${protocol}://${baseUrl}`;
+};
+
 export const getTopCoins = async (): Promise<CoinData[]> => {
   try {
-    const response = await fetch('/api/crypto?action=tickers');
+    const baseUrl = getBaseUrl();
+    const response = await fetch(`${baseUrl}/api/crypto?action=tickers`);
 
     if (!response.ok) {
       throw new Error('Failed to fetch coins');
@@ -19,7 +31,8 @@ export const searchCoins = async (query: string): Promise<CoinData[]> => {
   if (!query || query.length < 2) return [];
 
   try {
-    const response = await fetch(`/api/crypto?action=search&q=${encodeURIComponent(query)}`);
+    const baseUrl = getBaseUrl();
+    const response = await fetch(`${baseUrl}/api/crypto?action=search&q=${encodeURIComponent(query)}`);
     
     if (!response.ok) {
       throw new Error('Search failed');
@@ -34,7 +47,8 @@ export const searchCoins = async (query: string): Promise<CoinData[]> => {
 
 export const getFearAndGreedIndex = async (): Promise<FearGreedData | null> => {
   try {
-    const response = await fetch('/api/crypto?action=feargreed');
+    const baseUrl = getBaseUrl();
+    const response = await fetch(`${baseUrl}/api/crypto?action=feargreed`);
     
     if (!response.ok) {
       throw new Error('Failed to fetch Fear & Greed index');
@@ -49,7 +63,8 @@ export const getFearAndGreedIndex = async (): Promise<FearGreedData | null> => {
 
 export const getMarketSentiment = async (): Promise<MarketSentiment | null> => {
   try {
-    const response = await fetch('/api/crypto?action=sentiment');
+    const baseUrl = getBaseUrl();
+    const response = await fetch(`${baseUrl}/api/crypto?action=sentiment`);
     
     if (!response.ok) {
       throw new Error('Failed to fetch market sentiment');
