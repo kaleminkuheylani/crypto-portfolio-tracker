@@ -213,3 +213,4 @@ export async function DELETE(request: NextRequest) {
     console.error('Blogs DELETE error:', error);
     return NextResponse.json({ error: 'Sunucu hatası' }, { status: 500 });
   }
+}
