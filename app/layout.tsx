@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: '%s | KriptoSavası'
   },
   description: 'Yapay zeka destekli piyasa analizleri, canlı fiyat takibi ve akıllı portföy yönetimi. Kripto yatırımlarınızı Gemini AI ile güçlendirin.',
-  keywords: ['kripto', 'bitcoin', 'ethereum', 'analiz', 'yapay zeka', 'portföy takibi', 'gemini ai', 'borsa', 'kripto para', 'yatırım', 'fiyat takibi'],
+  keywords: ['kripto', 'bitcoin', 'ethereum', 'analiz', 'yapay zeka', 'portföy takibi', 'gemini ai', 'borsa', 'kripto para', 'yatırım', 'fiyat takibi', 'kripto para', 'kripto borsasi', 'kripto para analizi'],
   authors: [{ name: 'KriptoSavası' }],
   creator: 'KriptoSavası',
   publisher: 'KriptoSavası',

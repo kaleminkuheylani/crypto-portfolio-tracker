@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
     if (category === 'tahmin') {
       systemPrompt = `
         Sen bir SEO uzmanı ve kıdemli kripto analistisin. GÜNLÜK FİYAT TAHMİNİ makalesi yaz.
-        Odak: Önümüzdeki 24-48 saat içinde yükseliş veya düşüş beklediğin 2 coini seç.
+        Odak: Önümüzdeki 24-48 saat içinde yükseliş veya düşüş beklediğin 2 ${topMovers} seç.
         Yapı: Başlık H1, Alt başlıklar H2 kullan. Paragraflar kısa ve okunaklı olsun.
         Ton: Profesyonel ama spekülatif (Yatırım tavsiyesi değildir uyarısı ekle).
       `;

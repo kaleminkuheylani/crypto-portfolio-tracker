@@ -19,15 +19,15 @@ export default async function sitemap() {
   const coinPages = [];
   try {
     const coins = await getTopCoins();
-    // Limit to top 100 coins to provide better coverage while avoiding huge sitemap
-    const topCoins = coins.slice(0, 100);
+    // Limit to top 200 coins to provide better coverage for SEO
+    const topCoins = coins.slice(0, 200);
     
     for (const [index, coin] of topCoins.entries()) {
       // Calculate priority based on market cap rank (higher rank = higher priority)
-      // Top 10 coins get priority 0.9, next 20 get 0.8, rest get 0.7
+      // Top 10 coins get priority 0.9, next 40 get 0.8, rest get 0.7
       let priority = 0.7;
       if (index < 10) priority = 0.9;
-      else if (index < 30) priority = 0.8;
+      else if (index < 50) priority = 0.8;
       
       // Main coin detail page
       coinPages.push({
@@ -47,12 +47,42 @@ export default async function sitemap() {
     }
   } catch (error) {
     console.error("Failed to generate coin pages for sitemap:", error);
+    
+    // Fallback: Add some popular coins manually
+    const fallbackCoins = [
+      { id: 'bitcoin', symbol: 'btc' },
+      { id: 'ethereum', symbol: 'eth' },
+      { id: 'binance-coin', symbol: 'bnb' },
+      { id: 'solana', symbol: 'sol' },
+      { id: 'ripple', symbol: 'xrp' },
+      { id: 'cardano', symbol: 'ada' },
+      { id: 'dogecoin', symbol: 'doge' },
+      { id: 'polygon', symbol: 'matic' },
+      { id: 'chainlink', symbol: 'link' },
+      { id: 'litecoin', symbol: 'ltc' }
+    ];
+    
+    for (const coin of fallbackCoins) {
+      coinPages.push({
+        url: `${baseUrl}/piyasa/${coin.id}`,
+        lastModified: new Date(),
+        changeFrequency: 'hourly',
+        priority: 0.9,
+      });
+      
+      coinPages.push({
+        url: `${baseUrl}/grafik/${coin.symbol}`,
+        lastModified: new Date(),
+        changeFrequency: 'hourly',
+        priority: 0.7,
+      });
+    }
   }
   
   // Dynamic blog pages
   const blogPages = [];
   try {
-    const response = await fetch(`${baseUrl}/api/blogs?limit=50`);
+    const response = await fetch(`${baseUrl}/api/blogs?limit=100`);
     if (response.ok) {
       const blogs = await response.json();
       for (const blog of blogs) {

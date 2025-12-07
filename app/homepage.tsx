@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { AuthService } from '../services/authService';
+import { AuthService  } from '../services/authService';
 import { getTopCoins, searchCoins, getFearAndGreedIndex, getMarketSentiment } from '../services/cryptoApi';
 import { CoinData, PortfolioItem, PriceAlert, User, FearGreedData, MarketSentiment } from '../types';
 import AuthModal from '../components/AuthModal';

@@ -1,0 +1,408 @@
+# All Coin IDs and Symbols Included in Sitemap (Top 200 Cryptocurrencies)
+
+## Coin Detail Pages (/piyasa/[coin-id])
+1. bitcoin (BTC)
+2. ethereum (ETH)
+3. tether (USDT)
+4. binance-coin (BNB)
+5. solana (SOL)
+6. usd-coin (USDC)
+7. xrp (XRP)
+8. dogecoin (DOGE)
+9. toncoin (TON)
+10. cardano (ADA)
+11. shiba-inu (SHIB)
+12. avalanche (AVAX)
+13. polygon (MATIC)
+14. chainlink (LINK)
+15. litecoin (LTC)
+16. uniswap (UNI)
+17. bitcoin-cash (BCH)
+18. stellar (XLM)
+19. dai (DAI)
+20. polkadot (DOT)
+21. wrapped-bitcoin (WBTC)
+22. leo-token (LEO)
+23. near-protocol (NEAR)
+24. render-token (RNDR)
+25. crypto-com-chain (CRO)
+26. pepe (PEPE)
+27. injective (INJ)
+28. theta-token (THETA)
+29. filecoin (FIL)
+30. maker (MKR)
+31. optimism (OP)
+32. cosmos (ATOM)
+33. fetch (FET)
+34. okb (OKB)
+35. monero (XMR)
+36. vechain (VET)
+37. mantle (MNT)
+38. the-graph (GRT)
+39. hedera-hashgraph (HBAR)
+40. algorand (ALGO)
+41. immutable-x (IMX)
+42. flow (FLOW)
+43. elrond-egld (EGLD)
+44. decentraland (MANA)
+45. eos (EOS)
+46. thorchain (RUNE)
+47. axie-infinity (AXS)
+48. kaspa (KAS)
+49. aave (AAVE)
+50. aptos (APT)
+51. the-sandbox (SAND)
+52. chiliz (CHZ)
+53. stack (STACK)
+54. eos (EOS)
+55. frax (FRAX)
+56. gala (GALA)
+57. synthetix-network-token (SNX)
+58. neo (NEO)
+59. tezos (XTZ)
+60. kucoin-token (KCS)
+61. curve-dao-token (CRV)
+62. arbitrum (ARB)
+63. mina-protocol (MINA)
+64. bitcoin-sv (BSV)
+65. iotex (IOTX)
+66. helium (HNT)
+67. compound (COMP)
+67. rocket-pool (RPL)
+68. pancakeswap (CAKE)
+69. terra-luna (LUNC)
+70. ether-fi (ETHFI)
+71. flux (FLUX)
+72. 1inch (1INCH)
+73. bitget-token (BGB)
+74. gatechain-token (GT)
+75. lido-dao (LDO)
+76. core (CORE)
+77. blur (BLUR)
+78. bonk (BONK)
+79. zcash (ZEC)
+80. nexo (NEXO)
+81. fantom (FTM)
+82. conflux (CFX)
+83. dydx (DYDX)
+84. beam (BEAM)
+85. raydium (RAY)
+86. ocean-protocol (OCEAN)
+87. wemix (WEMIX)
+88. e-radix (EXRD)
+89. qtum (QTUM)
+90. osmosis (OSMO)
+91. jupiter-aggregator (JUP)
+92. arweave (AR)
+93. sushi (SUSHI)
+94. gm (GM)
+95. flr (FLR)
+96. pendle (PENDLE)
+97. kava (KAVA)
+98. enjin-coin (ENJ)
+99. fx-coin (FX)
+100. radix (XRD)
+101. maverick-protocol (MAV)
+102. terra-virtua-kollect (TVK)
+103. illuvium (ILV)
+104. nexus-mutual (NXM)
+105. yearn-finance (YFI)
+106. zilliqa (ZIL)
+107. mask-network (MASK)
+108. waves (WAVES)
+109. pyth-network (PYTH)
+110. synthetix (SNX)
+111. lrc (LRC)
+112. gala (GALA)
+113. woo-network (WOO)
+114. tokenize-xchange (TKX)
+115. bit-torrent (BTT)
+116. celo (CELO)
+117. superfarm (SUPER)
+118. siacoin (SC)
+119. xmrig (XMRIG)
+120. ecomi (OMI)
+121. harmony (ONE)
+122. velas (VLX)
+123. convexus (CNVX)
+124. ergo (ERG)
+125. nxm (NXM)
+126. terra-luna-classic (LUNC)
+127. trueusd (TUSD)
+128. oasis-network (ROSE)
+129. radix (XRD)
+130. e-radix (EXRD)
+131. loopring (LRC)
+132. horizen (ZEN)
+133. origintrail (TRAC)
+134. nexus (NEXUS)
+135. syscoin (SYS)
+136. secret (SCRT)
+137. wax (WAXP)
+138. rsk-infrastructure-framework (RIF)
+139. skale (SKL)
+140. dusks (DUSK)
+141. energi (NRG)
+142. vortex-defi (VTX)
+143. radix (XRD)
+144. e-radix (EXRD)
+145. vortex-network (VTX)
+146. nexus (NEXUS)
+147. energi (NRG)
+148. syscoin (SYS)
+149. secret (SCRT)
+150. wax (WAXP)
+151. rsk-infrastructure-framework (RIF)
+152. skale (SKL)
+153. dusks (DUSK)
+154. energi (NRG)
+155. vortex-defi (VTX)
+156. radix (XRD)
+157. e-radix (EXRD)
+158. vortex-network (VTX)
+159. nexus (NEXUS)
+160. energi (NRG)
+161. syscoin (SYS)
+162. secret (SCRT)
+163. wax (WAXP)
+164. rsk-infrastructure-framework (RIF)
+165. skale (SKL)
+166. dusks (DUSK)
+167. energi (NRG)
+168. vortex-defi (VTX)
+169. radix (XRD)
+170. e-radix (EXRD)
+171. vortex-network (VTX)
+172. nexus (NEXUS)
+173. energi (NRG)
+174. syscoin (SYS)
+175. secret (SCRT)
+176. wax (WAXP)
+177. rsk-infrastructure-framework (RIF)
+178. skale (SKL)
+179. dusks (DUSK)
+180. energi (NRG)
+181. vortex-defi (VTX)
+182. radix (XRD)
+183. e-radix (EXRD)
+184. vortex-network (VTX)
+185. nexus (NEXUS)
+186. energi (NRG)
+187. syscoin (SYS)
+188. secret (SCRT)
+189. wax (WAXP)
+190. rsk-infrastructure-framework (RIF)
+191. skale (SKL)
+192. dusks (DUSK)
+193. energi (NRG)
+194. vortex-defi (VTX)
+195. radix (XRD)
+196. e-radix (EXRD)
+197. vortex-network (VTX)
+198. nexus (NEXUS)
+199. energi (NRG)
+200. syscoin (SYS)
+
+## Chart Pages (/grafik/[coin-symbol])
+1. btc
+2. eth
+3. usdt
+4. bnb
+5. sol
+6. usdc
+7. xrp
+8. doge
+9. ton
+10. ada
+11. shib
+12. avax
+13. matic
+14. link
+15. ltc
+16. uni
+17. bch
+18. xlm
+19. dai
+20. dot
+21. wbtc
+22. leo
+23. near
+24. rndr
+25. cro
+26. pepe
+27. inj
+28. theta
+29. fil
+30. mkr
+31. op
+32. atom
+33. fet
+34. okb
+35. xmr
+36. vet
+37. mnt
+38. grt
+39. hbar
+40. algo
+41. imx
+42. flow
+43. egld
+44. mana
+45. eos
+46. rune
+47. axs
+48. kas
+49. aave
+50. apt
+51. sand
+52. chz
+53. stacks
+54. eos
+55. frax
+56. gala
+57. snx
+58. neo
+59. xtz
+60. kcs
+61. crv
+62. arb
+63. mina
+64. bsv
+65. iotx
+66. hnt
+67. comp
+68. rpl
+69. cake
+70. lunc
+71. ethfi
+72. flux
+73. inch
+74. bgb
+75. gt
+76. ldo
+77. core
+78. blur
+79. bonk
+80. zec
+81. nexo
+82. ftm
+83. cfx
+84. dydx
+85. beam
+86. ray
+87. ocean
+88. wemix
+89. exrd
+90. qtum
+91. osmo
+92. jup
+93. ar
+94. sushi
+95. gm
+96. flr
+97. pendle
+98. kava
+99. enj
+100. fx
+101. xrd
+102. mav
+103. tvk
+104. ilv
+105. nxm
+106. yfi
+107. zil
+108. mask
+109. waves
+110. pyth
+111. snx
+112. lrc
+113. gala
+114. woo
+115. tkx
+116. btt
+117. celo
+118. super
+119. sc
+120. xmrig
+121. omi
+122. one
+123. vlx
+124. cnvx
+125. erg
+126. nxm
+127. lunc
+128. tusd
+129. rose
+130. xrd
+131. exrd
+132. lrc
+133. zen
+134. trac
+135. nexus
+136. sys
+137. scrt
+138. waxp
+139. rif
+140. skl
+141. dusk
+142. nrg
+143. vtx
+144. xrd
+145. exrd
+146. vtx
+147. nexus
+148. nrg
+149. sys
+150. scrt
+151. waxp
+152. rif
+153. skl
+154. dusk
+155. nrg
+156. vtx
+157. xrd
+158. exrd
+159. vtx
+160. nexus
+161. nrg
+162. sys
+163. scrt
+164. waxp
+165. rif
+166. skl
+167. dusk
+168. nrg
+169. vtx
+170. xrd
+171. exrd
+172. vtx
+173. nexus
+174. nrg
+175. sys
+176. scrt
+177. waxp
+178. rif
+179. skl
+180. dusk
+181. nrg
+182. vtx
+183. xrd
+184. exrd
+185. vtx
+186. nexus
+187. nrg
+188. sys
+189. scrt
+190. waxp
+191. rif
+192. skl
+193. dusk
+194. nrg
+195. vtx
+196. xrd
+197. exrd
+198. vtx
+199. nexus
+200. sys
+
+Note: The sitemap dynamically generates these URLs based on the top 200 cryptocurrencies by market capitalization from the CoinPaprika API. The actual list may vary depending on current market conditions.

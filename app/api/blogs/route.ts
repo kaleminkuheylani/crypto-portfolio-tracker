@@ -191,3 +191,25 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Sunucu hatası' }, { status: 500 });
   }
 }
+
+export async function DELETE(request: NextRequest) {
+  try {
+    await connectDB();
+    
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get('id');
+
+    if (!id) {
+      return NextResponse.json({ error: 'Blog ID gerekli' }, { status: 400 });
+    }
+
+    const blog = await Blog.findByIdAndDelete(id);
+    if (!blog) {
+      return NextResponse.json({ error: 'Blog bulunamadı' }, { status: 404 });
+    }
+
+    return NextResponse.json({ success: true, message: 'Blog başarıyla silindi' });
+  } catch (error) {
+    console.error('Blogs DELETE error:', error);
+    return NextResponse.json({ error: 'Sunucu hatası' }, { status: 500 });
+  }

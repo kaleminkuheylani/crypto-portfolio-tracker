@@ -1,0 +1,48 @@
+# Example Coin URLs That Would Be Included in the Sitemap
+
+## Coin Detail Pages (/piyasa/[coin-id])
+These pages show detailed information about each cryptocurrency.
+
+1. https://kriptosavasi.com/piyasa/bitcoin - Bitcoin (BTC)
+2. https://kriptosavasi.com/piyasa/ethereum - Ethereum (ETH)
+3. https://kriptosavasi.com/piyasa/binance-coin - Binance Coin (BNB)
+4. https://kriptosavasi.com/piyasa/solana - Solana (SOL)
+5. https://kriptosavasi.com/piyasa/ripple - Ripple (XRP)
+6. https://kriptosavasi.com/piyasa/cardano - Cardano (ADA)
+7. https://kriptosavasi.com/piyasa/dogecoin - Dogecoin (DOGE)
+8. https://kriptosavasi.com/piyasa/polygon - Polygon (MATIC)
+9. https://kriptosavasi.com/piyasa/chainlink - Chainlink (LINK)
+10. https://kriptosavasi.com/piyasa/litecoin - Litecoin (LTC)
+
+## Chart Pages (/grafik/[coin-symbol])
+These pages show interactive charts for each cryptocurrency.
+
+1. https://kriptosavasi.com/grafik/btc - Bitcoin
+2. https://kriptosavasi.com/grafik/eth - Ethereum
+3. https://kriptosavasi.com/grafik/bnb - Binance Coin
+4. https://kriptosavasi.com/grafik/sol - Solana
+5. https://kriptosavasi.com/grafik/xrp - Ripple
+6. https://kriptosavasi.com/grafik/ada - Cardano
+7. https://kriptosavasi.com/grafik/doge - Dogecoin
+8. https://kriptosavasi.com/grafik/matic - Polygon
+9. https://kriptosavasi.com/grafik/link - Chainlink
+10. https://kriptosavasi.com/grafik/ltc - Litecoin
+
+## How the Sitemap Works
+
+The sitemap dynamically generates URLs for:
+- Top 200 cryptocurrencies by market cap
+- Each coin gets two pages:
+  1. A detail page using the coin's ID: /piyasa/[coin-id]
+  2. A chart page using the coin's symbol: /grafik/[coin-symbol]
+
+Priority is assigned based on market position:
+- Top 10 coins: Priority 0.9
+- Coins 11-50: Priority 0.8
+- Other coins: Priority 0.7
+- Chart pages: 0.2 less priority than detail pages
+
+Update frequency:
+- Coin pages: hourly (due to changing prices)
+- Blog pages: weekly
+- Static pages: daily

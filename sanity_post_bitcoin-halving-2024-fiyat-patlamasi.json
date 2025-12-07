@@ -1,0 +1,23 @@
+{
+  "_type": "post",
+  "_id": "post-1765059221446",
+  "_createdAt": "2025-12-06T22:13:41.446Z",
+  "title": "Bitcoin Halving: 2024'de Fiyat Patlaması mı?",
+  "slug": {
+    "_type": "slug",
+    "current": "bitcoin-halving-2024-fiyat-patlamasi"
+  },
+  "excerpt": "Bitcoin'in dört yılda bir gerçekleşen halving etkinliği hakkında uzman analizleri ve fiyat tahminleri. 2024 halving'inin piyasa üzerindeki etkileri detaylı incelemesi.",
+  "body": "\n        <h2>Bitcoin Halving Nedir?</h2>\n        <p>Bitcoin halving, Bitcoin protokolünün temel özelliklerinden biridir. Her 210.000 blokta bir (yaklaşık dört yılda bir) madencilerin blok ödülü yarıya indirilir. Bu mekanizma, Bitcoin'in enflasyonunu kontrol altında tutmak için tasarlanmıştır.</p>\n        \n        <h2>2024 Halving Etkileri</h2>\n        <p>Mayıs 2024'te gerçekleşen son halving etkinliğinde madenci ödülü 6.25 BTC'den 3.125 BTC'ye düştü. Bu azalma, piyasa tarafından talep artışı yaratırken arz azalmasına neden oldu.</p>\n        \n        <h2>Uzman Görüşleri</h2>\n        <ul>\n          <li><strong>Bull Kampı:</strong> Arz azalmasının doğal sonucu olarak fiyatların yükselmeye devam edeceği görüşünde</li>\n          <li><strong>Bear Kampı:</strong> Makro ekonomik faktörlerin etkisiyle fiyatların önce düşebileceğini savunanlar</li>\n          <li><strong>Nötr Yaklaşım:</strong> Halving'in tek başına fiyatı belirlemediğini, birçok faktörün bir araya geldiğini ifade eden analistler</li>\n        </ul>\n        \n        <h2>Tarihsel Veriler</h2>\n        <p>Önceki halving dönemlerinde fiyatların uzun vadede artış gösterdiği gözlemlense de kısa vadeli volatilite oldukça yüksek oldu. 2012 ve 2016 halving'lerinden sonra fiyatlar önemli yükselişler yaşadı ancak bu süreçte ciddi düzeltmeler de görüldü.</p>\n        \n        <h2>Sonuç</h2>\n        <p>Bitcoin halving tartışması, yalnızca teknik bir konu değil aynı zamanda yatırım stratejilerini de doğrudan etkileyen önemli bir mesele. Her yatırımcı kendi risk toleransına göre bu gelişmeleri değerlendirmeli ve kararlarını vermelidir.</p>\n        \n        <p><em>Bu analiz yatırım tavsiyesi değildir. Kripto para yatırımları yüksek risk taşımaktadır.</em></p>\n      ",
+  "publishedAt": "2025-12-06T22:13:41.520Z",
+  "author": {
+    "_type": "reference",
+    "name": "KriptoSavasi AI"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "title": "analiz"
+    }
+  ]
+}

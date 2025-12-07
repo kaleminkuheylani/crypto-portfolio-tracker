@@ -12,8 +12,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json([{
         title: "Portföy Boş",
         content: "AI öngörüleri oluşturmak için portföyünüze varlık ekleyin.",
-        sentiment: "neutral",
-        recommendation: "hold"
+        sentiment: "neutral"
       }]);
     }
 
@@ -60,7 +59,6 @@ export async function POST(request: NextRequest) {
       title: "Analiz Başarısız",
       content: "Şu anda öngörü oluşturulamıyor. Lütfen API anahtarınızı veya bağlantınızı kontrol edin.",
       sentiment: "neutral",
-      recommendation: "hold"
     }]);
   }
 }
